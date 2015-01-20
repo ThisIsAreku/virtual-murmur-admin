@@ -1,8 +1,7 @@
 {
-    "name": "symfony/framework-standard-edition",
-    "license": "MIT",
+    "name": "thisisareku/virtual-murmur-admin",
     "type": "project",
-    "description": "The \"Symfony Standard Edition\" distribution",
+    "description": "Mumble Administration panel, focused on virtual servers",
     "autoload": {
         "psr-0": { "": "src/", "SymfonyStandard": "app/" }
     },
