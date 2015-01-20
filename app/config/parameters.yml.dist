@@ -3,4 +3,9 @@ parameters:
     locale:            en
 
     # A secret key that's used to generate certain security-related tokens
-    secret:            ThisTokenIsNotSoSecretChangeIt
+    secret:            VeryVerySecretToo
+
+
+    vma_ice_secret:    "hello"
+    vma_ice_host:      "Meta:tcp -h 127.0.0.1 -p 6502"
+    vma_ice_include:   "/usr/local/Cellar/ice/3.5.1/php"
