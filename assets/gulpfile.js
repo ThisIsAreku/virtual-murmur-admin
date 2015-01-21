@@ -10,6 +10,7 @@ var base_path = '../';
 var web_path = base_path+'web/';
 
 var stylesheets_path = web_path+'stylesheets/';
+var images_path = web_path+'images/';
 
 function createDirOrFail(path, callback) {
     fs.mkdir(path, function (err) {
@@ -29,6 +30,7 @@ gulp.task('first-deploy', ['create-tmp']);
 
 gulp.task('create-tmp', function () {
     createDirOrFail(stylesheets_path);
+    createDirOrFail(images_path);
 });
 
 
@@ -38,6 +40,12 @@ gulp.task('stylesheets', function () {
         .pipe(less())
         .pipe(prefix())
         .pipe(gulp.dest(stylesheets_path))
+})
+
+gulp.task('images', function () {
+    gulp.src('images/*.jpg')
+        .pipe(plumber())
+        .pipe(gulp.dest(images_path))
 })
 
 // gulp.task('js', function () {
