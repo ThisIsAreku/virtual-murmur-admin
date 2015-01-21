@@ -1,7 +1,15 @@
-{% extends "VmaApplicationBundle:Layout:hub.html.twig" %}
+{% extends "AppBundle:Layout:hub.html.twig" %}
+{% import "AppBundle:Macros:MurmurTreeBuilder.html.twig" as murmur_tree_builder %}
+
+{% block meta_title %}Hub{%endblock %}
 
 {% block body %}
-<h1 class="page-header">Dashboard</h1>
+<h1 class="page-header">{{ serverTree.c.name }}</h1>
+
+    <ul>
+      {{ murmur_tree_builder.full_tree(serverTree.children) }}
+    </ul>
+
 <div class="row placeholders">
 <div class="col-xs-6 col-sm-3 placeholder">
   <img src="//placehold.it/200x200" class="img-responsive" alt="Generic placeholder thumbnail">

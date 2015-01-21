@@ -1,12 +1,13 @@
 <?php
 
-namespace Vma\Util;
+namespace MurmurBundle\Proxy;
 
-class IceProxy 
+class IceProxy
 {
     private $iceHost;
     private $iceSecret;
     private $meta;
+    private $version;
 
     function __construct($iceHost, $iceSecret, $sliceIncludeFile, $iceIncludePath = null)
     {
@@ -23,7 +24,7 @@ class IceProxy
         }
 
         if (!file_exists($sliceIncludeFile)) {
-            die('Slice file is missing');
+            die('Slice file is missing: '.$sliceIncludeFile);
         }
 
         require_once 'Ice.php';
@@ -43,21 +44,19 @@ class IceProxy
             $this->loadIce34();
         }
 
-        echo 'end';
-
-        die;
+        if (!empty($this->iceSecret)) {
+            $this->meta = $this->meta->ice_context(['secret' => $this->iceSecret]);
+        }
     }
 
     private function loadIce33()
     {
-        echo __METHOD__;
         global $ICE;
         Ice_loadProfile();
 
         try {
             $conn = $ICE->stringToProxy($this->iceHost);
             $this->meta = $conn->ice_checkedCast('::Murmur::Meta');
-            var_dump($this->meta);
         } catch (\Ice_ProxyParseException $e) {
             echo $e->getMessage();
         }
@@ -68,15 +67,16 @@ class IceProxy
         $initData = new \Ice_InitializationData();
         $initData->properties = Ice_createProperties();
         $initData->properties->setProperty('Ice.ImplicitContext', 'Shared');
+        $initData->properties->setProperty('Ice.Default.EncodingVersion', '1.0');
         $ICE = Ice_initialize($initData);
 
-        try {
-            $this->meta = \Murmur_MetaPrxHelper::checkedCast($ICE->stringToProxy($this->iceHost));
-            var_dump($this->meta);
-            $this->meta = $this->meta->ice_context(['secret' => $this->iceSecret]);
-        } catch (\Ice_ConnectionRefusedException $e) {
-            echo "Cannot connect to backend";
-        }
+        $proxy = $ICE->stringToProxy($this->iceHost);
+        $this->meta = \Murmur_MetaPrxHelper::checkedCast($proxy);
+    }
+
+    protected function getMeta()
+    {
+        return $this->meta;
     }
 
 

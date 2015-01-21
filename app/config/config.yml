@@ -30,7 +30,3 @@ twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
 
-vma:
-    ice_host: "%vma_ice_host%"
-    ice_secret: "%vma_ice_secret%"
-    ice_include: "%vma_ice_include%"
