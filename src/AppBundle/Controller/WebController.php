@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class WebController extends Controller
 {
@@ -19,9 +20,14 @@ class WebController extends Controller
      */
     public function viewAction($serverId)
     {
-        $murmurProxy = $this->get('murmur.proxy');
+        $murmurMeta = $this->get('murmur.meta');
 
-        $server = $murmurProxy->getServer($serverId);
+        try {
+            /** @var \MurmurBundle\Model\MurmurServer $server */
+            $server = $murmurMeta->getServer($serverId);
+        } catch(\Exception $e) {
+            throw new NotFoundHttpException();
+        }
 
         return $this->render('AppBundle:Web:view.html.twig', [
             'serverId'  => $serverId,

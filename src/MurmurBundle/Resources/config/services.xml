@@ -4,17 +4,21 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
         <!-- Util -->
-        <service id="murmur.proxy" class="MurmurBundle\Proxy\MurmurProxy">
+        <service id="murmur.ice.proxy" class="MurmurBundle\Proxy\IceProxy" public="false">
             <argument>%vma_ice_host%</argument>
             <argument>%vma_ice_secret%</argument>
             <argument>%kernel.root_dir%/Resources/slice/Murmur.php</argument>
             <argument>%vma_ice_include%</argument>
         </service>
 
+        <service id="murmur.meta" class="MurmurBundle\Model\MurmurMeta">
+            <argument type="service" id="murmur.ice.proxy" />
+        </service>
+
 
         <service id="app.twig.murmur_version_extension" class="MurmurBundle\Twig\MurmurVersionExtension">
             <tag name="twig.extension" />
-            <argument id="murmur.proxy" type="service" />
+            <argument id="murmur.meta" type="service" />
         </service>
 
     </services>

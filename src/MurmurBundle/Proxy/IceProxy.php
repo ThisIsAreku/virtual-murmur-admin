@@ -7,7 +7,6 @@ class IceProxy
     private $iceHost;
     private $iceSecret;
     private $meta;
-    private $version;
 
     function __construct($iceHost, $iceSecret, $sliceIncludeFile, $iceIncludePath = null)
     {
@@ -74,7 +73,7 @@ class IceProxy
         $this->meta = \Murmur_MetaPrxHelper::checkedCast($proxy);
     }
 
-    protected function getMeta()
+    public function getMeta()
     {
         return $this->meta;
     }

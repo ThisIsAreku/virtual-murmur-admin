@@ -2,7 +2,7 @@
 
 namespace AppBundle\Controller;
 
-use Vma\Util;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -13,8 +13,10 @@ class HubController extends Controller
      */
     public function indexAction()
     {
+
+        throw new NotFoundHttpException();
         /** @var \MurmurBundle\Proxy\MurmurIceProxyInterface $murmurProxy */
-        $murmurProxy = $this->get('murmur.proxy');
+        //$murmurProxy = $this->get('murmur.proxy');
 /*
         $allServersUsers = [];
         $serverTree = null;

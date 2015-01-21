@@ -8,21 +8,21 @@
 
 namespace MurmurBundle\Twig;
 
-use MurmurBundle\Proxy\MurmurIceProxyInterface;
+use MurmurBundle\Model\MurmurMeta;
 
 class MurmurVersionExtension extends \Twig_Extension
 {
-    private $iceProxy;
+    private $murmurMeta;
 
-    function __construct(MurmurIceProxyInterface $iceProxy)
+    function __construct(MurmurMeta $murmurMeta)
     {
-        $this->iceProxy = $iceProxy;
+        $this->murmurMeta = $murmurMeta;
     }
 
 
     public function getGlobals()
     {
-        return ["MurmurServerVersion" => $this->iceProxy->getVersion()];
+        return ["MurmurServerVersion" => $this->murmurMeta->getVersion()];
     }
 
 

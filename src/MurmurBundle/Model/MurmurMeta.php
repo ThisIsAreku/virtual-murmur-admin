@@ -3,29 +3,32 @@
  * Created by PhpStorm.
  * User: alexandre
  * Date: 21/01/15
- * Time: 19:08
+ * Time: 23:26
  */
 
-namespace MurmurBundle\Proxy;
+namespace MurmurBundle\Model;
 
-use \Murmur_Meta;
 
-class MurmurProxy extends IceProxy implements MurmurIceProxyInterface
+use MurmurBundle\Proxy\IceProxy;
+
+class MurmurMeta
 {
-    /** @var Murmur_Meta */
-    private $murmurMeta = null;
 
-    protected $version = null;
+    /** @var \Murmur_Meta **/
+    private $murmurMeta;
+
+    private $version;
+
+    function __construct(IceProxy $iceProxy)
+    {
+        $this->murmurMeta = $iceProxy->getMeta();
+    }
 
     /**
-     * @return Murmur_Meta
+     * @return \Murmur_Meta
      */
-    private function getMurmurMeta()
+    public function getMurmurMeta()
     {
-        if ($this->murmurMeta == null) {
-            $this->murmurMeta = $this->getMeta();
-        }
-
         return $this->murmurMeta;
     }
 
@@ -58,7 +61,7 @@ class MurmurProxy extends IceProxy implements MurmurIceProxyInterface
 
     public function getServer($id)
     {
-        return $this->getMurmurMeta()->getServer((int)$id);
+        return MurmurServer::fromIceObject($this->getMurmurMeta()->getServer((int)$id));
     }
 
     public function createServer()

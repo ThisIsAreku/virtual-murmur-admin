@@ -15,6 +15,13 @@
     {% for treeEntry in tree %}
         <li>
             <a href="#">{{ treeEntry.c.name }}</a>
+            {% if treeEntry.users %}
+                <ul>
+                    {% for user in treeEntry.users %}
+                        <li>{{ user.name }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
             {% if treeEntry.children %}
                 <ul>
                     {{ _self.full_tree(treeEntry.children) }}
