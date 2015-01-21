@@ -1,0 +1,9 @@
+{% extends "AppBundle:Layout:web.html.twig" %}
+
+{% block meta_title %}Web{%endblock %}
+
+{% block body %}
+<h1 class="page-header">{{ serverId }}</h1>
+    {{ dump(server) }}
+{% endblock %}
+

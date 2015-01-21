@@ -1,0 +1,25 @@
+{% macro menu_links(links) %}
+    {% for link in links %}
+        <li>
+            <a href="{{ link.href }}">{{ link.name }}</a>
+            {% if link.sublinks %}
+                <ul>
+                    {{ _self.menu_links(link.sublinks) }}
+                </ul>
+            {% endif %}
+        </li>
+    {% endfor %}
+{% endmacro %}
+
+{% macro full_tree(tree) %}
+    {% for treeEntry in tree %}
+        <li>
+            <a href="#">{{ treeEntry.c.name }}</a>
+            {% if treeEntry.children %}
+                <ul>
+                    {{ _self.full_tree(treeEntry.children) }}
+                </ul>
+            {% endif %}
+        </li>
+    {% endfor %}
+{% endmacro %}
