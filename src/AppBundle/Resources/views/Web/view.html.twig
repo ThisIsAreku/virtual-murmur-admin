@@ -1,10 +1,10 @@
 {% extends "AppBundle:Layout:web.html.twig" %}
 {% import "AppBundle:Macros:MurmurTreeBuilder.html.twig" as murmur_tree_builder %}
 
-{% block meta_title %}Web{%endblock %}
+{% block meta_title %}{{ server.name }}{%endblock %}
 
 {% block body %}
-<h1 class="page-header">{{ server.rootChannel.name }}</h1>
+<h1 class="page-header">{{ server.name }}</h1>
 
 <ul>
     {{ murmur_tree_builder.full_tree(server.tree.children) }}

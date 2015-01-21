@@ -12,6 +12,7 @@ use MurmurBundle\Model\MurmurMeta;
 
 class MurmurVersionExtension extends \Twig_Extension
 {
+    /** @var \MurmurBundle\Model\MurmurMeta **/
     private $murmurMeta;
 
     function __construct(MurmurMeta $murmurMeta)

@@ -56,6 +56,11 @@ class MurmurServer
         return $this->murmurServer->id();
     }
 
+    public function getName()
+    {
+        return $this->getRootChannel()->name;
+    }
+
     public function getConf($key)
     {
         return $this->murmurServer->getConf($key);

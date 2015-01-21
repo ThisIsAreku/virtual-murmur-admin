@@ -37,7 +37,7 @@ class MurmurMeta
         if ($this->version == null) {
             $major = $minor = $patch = $text = 0;
             $this->getMurmurMeta()->getVersion($major, $minor, $patch, $text);
-            $this->version = $major . '.' . $minor . '.' . $patch . ' ' . $text;
+            $this->version = $major . '.' . $minor . '.' . $patch . ' (' . $text . ')';
         }
 
         return $this->version;
@@ -51,12 +51,24 @@ class MurmurMeta
 
     public function getAllServers()
     {
-        return $this->getMurmurMeta()->getAllServers();
+        $returnServers = [];
+        $allServers = $this->getMurmurMeta()->getAllServers();
+        foreach ($allServers as $key => $server) {
+            $returnServers[$key] = MurmurServer::fromIceObject($server);
+        }
+
+        return $returnServers;
     }
 
     public function getBootedServers()
     {
-        return $this->getMurmurMeta()->getBootedServers();
+        $returnServers = [];
+        $bootedServers = $this->getMurmurMeta()->getBootedServers();
+        foreach ($bootedServers as $key => $server) {
+            $returnServers[$key] = MurmurServer::fromIceObject($server);
+        }
+
+        return $returnServers;
     }
 
     public function getServer($id)
