@@ -9,8 +9,8 @@
     {% for server in aliveServers %}
     <a href="{{ path('web.view', { 'serverId': server.id }) }}" class="col-xs-6 col-sm-3 placeholder">
         <img src="//placehold.it/200x200" class="img-responsive" alt="Generic placeholder thumbnail">
-        <h4>{{ server.name }}</h4>
-        <span class="text-muted">{{ server.uptime }}</span>
+        <h4>{{ server.name }} <small><strong>{{ server.countUsers }}</strong>/{{ server.maxUsers }}</small></h4>
+        <span class="text-muted">{{ server.uptime|seconds_pretty }}</span>
     </a>
     {% endfor %}
 </div>

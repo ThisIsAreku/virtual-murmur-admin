@@ -81,6 +81,16 @@ class MurmurServer
         return $this->murmurServer->getUsers();
     }
 
+    public function getCountUsers()
+    {
+        return count($this->getUsers());
+    }
+
+    public function getMaxUsers()
+    {
+        return $this->getConf('users');
+    }
+
     public function getChannels()
     {
         return $this->murmurServer->getChannels();
