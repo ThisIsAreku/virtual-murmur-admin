@@ -32,12 +32,15 @@
                     <span class="icon-bar"></span>
                 </button>
                 <span class="navbar-brand">
-                    <a href="{{ path('homepage') }}">Virtual Murmur Admin</a> <small>{{ MurmurServerVersion }}</small>
+                    <a href="{{ path('web.index') }}">Virtual Murmur Admin</a> <small>{{ MurmurServerVersion }}</small>
                 </span>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li{% if 'hub' in app.request.attributes.get('_route') %} class="active"{% endif %}><a href="{{ path('hub') }}">Hub</a></li>
+                    <li{% if 'hub' in app.request.attributes.get('_route') %} class="active"{% endif %}><a href="{{ path('hub.index') }}">Hub</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li{% if 'web' in app.request.attributes.get('_route') %} class="active"{% endif %}><a href="{{ path('web.index') }}">Accueil</a></li>
                 </ul>
             </div>
         </div>

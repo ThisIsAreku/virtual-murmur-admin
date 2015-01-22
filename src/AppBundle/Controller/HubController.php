@@ -9,7 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class HubController extends Controller
 {
     /**
-     * @Route("/hub", name="hub")
+     * @Route("/hub", name="hub.index")
      */
     public function indexAction()
     {

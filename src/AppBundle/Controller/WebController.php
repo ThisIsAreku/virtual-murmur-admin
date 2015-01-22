@@ -10,7 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 class WebController extends Controller
 {
     /**
-     * @Route("/", name="homepage")
+     * @Route("/", name="web.index")
      */
     public function indexAction()
     {
