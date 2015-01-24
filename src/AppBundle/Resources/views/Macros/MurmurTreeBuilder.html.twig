@@ -13,19 +13,29 @@
 
 {% macro full_tree(tree) %}
     {% for treeEntry in tree %}
-        <li>
-            <a href="#">{{ treeEntry.c.name }}</a>
+        <li id="channel-{{ treeEntry.c.id }}" class="channel">
+            {% if treeEntry.hasSubContent %}
+                <i class="fa-li fa fa-caret-{% if not treeEntry.collapsed %}down{% else %}right{% endif %}"></i>
+            {% endif %}
+            <a href="#" class="channel-header"{% if treeEntry.hasSubContent %} data-toggle="collapse" data-target="#channel-{{ treeEntry.c.id }}>.data"{% endif %}>{{ treeEntry.c.name }}{% if treeEntry.numUsersInSubtree > 0 %} ({{ treeEntry.numUsersInSubtree }}){% endif %}</a>
+        {% if treeEntry.c.description %}
+            <i class="fa fa-info-circle channel-description" data-title="{{ treeEntry.c.description }}"></i>
+        {% endif %}
+        {% if treeEntry.hasSubContent %}
+            <div class="data collapse{% if not treeEntry.collapsed %} in{% endif %}">
             {% if treeEntry.users %}
-                <ul>
+                <ul class="channel-users">
                     {% for user in treeEntry.users %}
                         <li>{{ user.name }}</li>
                     {% endfor %}
                 </ul>
             {% endif %}
             {% if treeEntry.children %}
-                <ul>
+                <ul class="fa-ul channel-children">
                     {{ _self.full_tree(treeEntry.children) }}
                 </ul>
+            {% endif %}
+            </div>
             {% endif %}
         </li>
     {% endfor %}

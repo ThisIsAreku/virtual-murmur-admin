@@ -108,7 +108,7 @@ class MurmurServer
 
     public function getTree()
     {
-        return $this->murmurServer->getTree();
+        return new MurmurServerTree($this->murmurServer->getTree());
     }
 
     public function getBans()
