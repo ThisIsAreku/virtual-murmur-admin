@@ -107,10 +107,13 @@ body {
 
 .placeholders a.placeholder {
   text-decoration: none;
-  transition: opacity 500ms;
+  transition: all 500ms;
   opacity: 0.8;
   &:hover {
     opacity: 1;
+    & img {
+      filter: grayscale(0);
+    }
   }
 }
 
@@ -125,6 +128,8 @@ body {
 .placeholder img {
   display: inline-block;
   border-radius: 50%;
+  transition: all 500ms;
+  filter: grayscale(1);
 }
 
 
