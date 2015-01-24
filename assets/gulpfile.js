@@ -4,12 +4,14 @@ var less        = require('gulp-less');
 var prefix      = require('gulp-autoprefixer');
 var plumber     = require('gulp-plumber');
 var concat      = require('gulp-concat');
+var watch       = require('gulp-watch');
 
 var base_path = '../';
 
 var web_path = base_path+'web/';
 
 var stylesheets_path = web_path+'stylesheets/';
+var javascripts_path = web_path+'javascripts/';
 var images_path = web_path+'images/';
 
 function createDirOrFail(path, callback) {
@@ -24,7 +26,7 @@ function createDirOrFail(path, callback) {
     })
 }
 
-gulp.task('default', ['stylesheets']);
+gulp.task('default', ['stylesheets', 'js']);
 gulp.task('first-deploy', ['create-tmp']);
 
 
@@ -48,10 +50,22 @@ gulp.task('images', function () {
         .pipe(gulp.dest(images_path))
 })
 
-// gulp.task('js', function () {
-//     gulp.src(['node_modules/bootstrap/dist/js/bootstrap.min.js', 'js/web.js'])
-//         .pipe(concat('web.js', {newLine: ';'}))
-//         .pipe(gulp.dest('../webroot/js/'))
-// })
+gulp.task('js', function () {
+     gulp.src(['javascripts/web.js'])
+         .pipe(concat('web.js', {newLine: ';'}))
+         .pipe(gulp.dest(javascripts_path))
+})
+
+gulp.task('watch', ['default'], function (){
+    watch('javascripts/web.js')
+        .pipe(concat('web.js', {newLine: ';'}))
+        .pipe(gulp.dest(javascripts_path));
+
+    watch('stylesheets/*.less')
+        .pipe(plumber())
+        .pipe(less())
+        .pipe(prefix())
+        .pipe(gulp.dest(stylesheets_path))
+});
 
 

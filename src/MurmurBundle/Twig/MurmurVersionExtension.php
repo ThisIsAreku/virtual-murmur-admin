@@ -30,38 +30,12 @@ class MurmurVersionExtension extends \Twig_Extension
 
     public function elapsedSecondsHumanReadableFilter($string)
     {
-        if(empty($string) || !is_numeric($string))
-            return '0 secs';
+        $totalSec = intval($string);
+        $hours = intval( $totalSec / 3600 ) % 24;
+        $minutes = intval( $totalSec / 60 ) % 60;
+        $seconds = round($totalSec % 60, 0);
 
-        $blocks = array(
-            'year' => 52*7*24*60*60,
-            'month' => 30*24*60*60,
-            'week' => 7*24*60*60,
-            'day' => 24*60*60,
-            'hour' => 60*60,
-            'min' => 60,
-            'sec' => 1,
-        );
-
-        $secs = intval($string);
-        $output = array();
-
-        foreach($blocks as $label => $increment) {
-            $n = floor($secs/$increment);
-            $secs -= ($n * $increment);
-
-            if(!empty($n))
-                $output[] = sprintf("%d %s%s",
-                    $n,
-                    $label,
-                    ($n==1) ? '' : 's'
-                );
-        }
-
-        if(!empty($length))
-            $output = array_slice($output, 0, $length);
-
-        return implode(', ', $output);
+        return ($hours < 10 ? "0" . $hours : $hours) . "h " . ($minutes < 10 ? "0" . $minutes : $minutes) . "min " . ($seconds  < 10 ? "0" . $seconds : $seconds) . 's';
     }
 
 

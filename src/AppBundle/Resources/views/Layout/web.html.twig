@@ -9,3 +9,11 @@
         </div>
     </div>
 {% endblock %}
+
+{% block meta_others %}
+    <link href="{{ asset('/stylesheets/web.css') }}" rel="stylesheet" media="screen" />
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('/javascripts/web.js') }}" type="text/javascript"></script>
+{% endblock %}
