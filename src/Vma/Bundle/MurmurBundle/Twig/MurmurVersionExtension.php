@@ -33,8 +33,9 @@ class MurmurVersionExtension extends \Twig_Extension
         $hours = intval($totalSec / 3600) % 24;
         $minutes = intval($totalSec / 60) % 60;
         $seconds = round($totalSec % 60, 0);
+        $days = round($totalSec / 86400);
 
-        return ($hours < 10 ? "0" . $hours : $hours) . "h " . ($minutes < 10 ? "0" . $minutes : $minutes) . "min " . ($seconds < 10 ? "0" . $seconds : $seconds) . 's';
+        return ($days > 0 ? $days . "j " : '') . ($hours < 10 ? "0" . $hours : $hours) . "h " . ($minutes < 10 ? "0" . $minutes : $minutes) . "min " . ($seconds < 10 ? "0" . $seconds : $seconds) . 's';
     }
 
 

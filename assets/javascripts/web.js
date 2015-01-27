@@ -3,8 +3,9 @@ function toHHMMSS(sec_num) {
     var hours = parseInt( totalSec / 3600 ) % 24;
     var minutes = parseInt( totalSec / 60 ) % 60;
     var seconds = Math.round(totalSec % 60);
+    var days = Math.round(totalSec / 86400);
 
-    return (hours < 10 ? "0" + hours : hours) + "h " + (minutes < 10 ? "0" + minutes : minutes) + "min " + (seconds  < 10 ? "0" + seconds : seconds) + 's';
+    return (days > 0 ? days + "j " : '') + (hours < 10 ? "0" + hours : hours) + "h " + (minutes < 10 ? "0" + minutes : minutes) + "min " + (seconds  < 10 ? "0" + seconds : seconds) + 's';
 }
 
 $(function() {
