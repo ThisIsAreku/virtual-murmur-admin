@@ -30,6 +30,6 @@ $(function() {
 
     $('.tree-list .data.collapse').on('show.bs.collapse hide.bs.collapse', function (e) {
         e.stopPropagation();
-        $(this).parent().children('i.fa').toggleClass('fa-caret-down fa-caret-right');
+        $(this).parent().children('i.collapse-caret').toggleClass('fa-caret-down fa-caret-right');
     });
 });

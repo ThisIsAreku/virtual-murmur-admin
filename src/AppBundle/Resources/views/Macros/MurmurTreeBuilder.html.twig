@@ -15,7 +15,7 @@
     {% for treeEntry in tree %}
         <li id="channel-{{ treeEntry.c.id }}" class="channel">
             {% if treeEntry.hasSubContent %}
-                <i class="fa-li fa fa-caret-{% if not treeEntry.collapsed %}down{% else %}right{% endif %}"></i>
+                <i class="fa-li fa fa-caret-{% if not treeEntry.collapsed %}down{% else %}right{% endif %} collapse-caret"></i>
             {% endif %}
             <a href="#" class="channel-header"{% if treeEntry.hasSubContent %} data-toggle="collapse" data-target="#channel-{{ treeEntry.c.id }}>.data"{% endif %}>{{ treeEntry.c.name }}{% if treeEntry.numUsersInSubtree > 0 %} ({{ treeEntry.numUsersInSubtree }}){% endif %}</a>
         {% if treeEntry.c.description %}
