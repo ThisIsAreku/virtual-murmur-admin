@@ -1,0 +1,14 @@
+{% extends "ResourceBundle:Layout:web.html.twig" %}
+{% import "ResourceBundle:Macros:MurmurTreeBuilder.html.twig" as murmur_tree_builder %}
+
+{% block meta_title %}{{ server.name }}{%endblock %}
+
+{% block body %}
+<h1 class="page-header"><a href="{{ path('web.index') }}" class="back-link">&lt;</a> {{ server.name }} <small><strong>{{ server.countUsers }}</strong>/{{ server.maxUsers }}</small></h1>
+
+<ul class="fa-ul tree-list">
+    {{ murmur_tree_builder.full_tree(server.tree.children) }}
+</ul>
+
+{% endblock %}
+

@@ -1,0 +1,18 @@
+{% extends "ResourceBundle:Layout:web.html.twig" %}
+
+{% block meta_title %}Web{%endblock %}
+
+{% block body %}
+<h1 class="page-header">Virtual Murmur Admin</h1>
+
+<div class="row placeholders text-center">
+    {% for server in aliveServers %}
+    <a href="{{ path('web.view', { 'serverId': server.id }) }}" class="col-xs-6 col-sm-3 placeholder">
+        <img src="http://lorempixel.com/200/200/abstract/{{ server.id }}" class="img-responsive" alt="Generic placeholder thumbnail">
+        <h4>{{ server.name }} <small><strong>{{ server.countUsers }}</strong>/{{ server.maxUsers }}</small></h4>
+        <span class="text-muted" data-uptime="{{ server.uptime }}">{{ server.uptime|seconds_pretty }}</span>
+    </a>
+    {% endfor %}
+</div>
+{% endblock %}
+

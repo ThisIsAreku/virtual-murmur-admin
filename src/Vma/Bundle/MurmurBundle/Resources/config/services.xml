@@ -1,0 +1,27 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+
+    <services>
+        <!-- Util -->
+        <service id="murmur.ice.proxy" class="Vma\Domain\Murmur\Proxy\MurmurIceProxy" public="false">
+            <argument>%vma_ice_host%</argument>
+            <argument>%vma_ice_secret%</argument>
+            <argument>%kernel.root_dir%/Resources/slice/Murmur.php</argument>
+            <argument>%vma_ice_include%</argument>
+        </service>
+
+        <service id="murmur.meta" class="Vma\Domain\Murmur\Model\MurmurMeta">
+            <argument type="service" id="murmur.ice.proxy" />
+        </service>
+
+
+        <service id="app.twig.murmur_version_extension" class="Vma\Bundle\MurmurBundle\Twig\MurmurVersionExtension">
+            <tag name="twig.extension" />
+            <argument id="murmur.meta" type="service" />
+        </service>
+    </services>
+</container>

@@ -1,3 +1,7 @@
-app:
-    resource: @AppBundle/Controller/
-    type:     annotation
+hub:
+    resource: "@HubBundle/Resources/config/routing.xml"
+    prefix:   /hub
+
+web:
+    resource: "@WebBundle/Resources/config/routing.xml"
+    prefix:   /
