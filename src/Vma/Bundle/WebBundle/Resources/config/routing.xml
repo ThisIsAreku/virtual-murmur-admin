@@ -10,5 +10,6 @@
 
     <route id="web.view" path="/view/{serverId}">
         <default key="_controller">WebBundle:Default:view</default>
+        <requirement key="serverId">\d+</requirement>
     </route>
 </routes>
