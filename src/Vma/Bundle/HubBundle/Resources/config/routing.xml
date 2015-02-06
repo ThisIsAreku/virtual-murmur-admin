@@ -7,4 +7,18 @@
     <route id="hub.index" path="/">
         <default key="_controller">HubBundle:Default:index</default>
     </route>
+
+    <route id="hub.edit" path="/edit/{serverId}">
+        <default key="_controller">HubBundle:Default:edit</default>
+        <requirement key="serverId">\d+</requirement>
+    </route>
+
+    <route id="hub.conf" path="/conf">
+        <default key="_controller">HubBundle:Default:conf</default>
+    </route>
+
+    <route id="hub.control.startstop" path="/control/startstop/{serverId}">
+        <default key="_controller">HubBundle:Control:startstop</default>
+        <requirement key="serverId">\d+</requirement>
+    </route>
 </routes>
