@@ -65,7 +65,7 @@ class MurmurServer
 
     public function getConf($key)
     {
-        $confVal = $this->getConf($key);
+        $confVal = $this->murmurServer->getConf($key);
         if (empty($confVal)) {
             $confVal = $this->murmurMeta->getDefaultConf($key);
         }
