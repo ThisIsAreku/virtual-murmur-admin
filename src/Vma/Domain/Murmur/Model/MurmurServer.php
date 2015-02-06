@@ -15,19 +15,21 @@ class MurmurServer
 
     /** @var \Murmur_Server */
     private $murmurServer = null;
+    private $murmurMeta = null;
 
-    private function __construct(\Ice_ObjectPrx $murmurServer)
+    private function __construct(\Ice_ObjectPrx $murmurServer, MurmurMeta $meta)
     {
         $this->murmurServer = $murmurServer;
+        $this->murmurMeta = $meta;
     }
 
     /**
      * @param \Ice_ObjectPrx $iceObject
      * @return MurmurServer
      */
-    public static function fromIceObject(\Ice_ObjectPrx $iceObject)
+    public static function fromIceObject(\Ice_ObjectPrx $iceObject, MurmurMeta $meta)
     {
-        return new self(\Murmur_ServerPrxHelper::checkedCast($iceObject));
+        return new self(\Murmur_ServerPrxHelper::checkedCast($iceObject), $meta);
     }
 
 
@@ -63,7 +65,12 @@ class MurmurServer
 
     public function getConf($key)
     {
-        return $this->murmurServer->getConf($key);
+        $confVal = $this->getConf($key);
+        if (empty($confVal)) {
+            $confVal = $this->murmurMeta->getDefaultConf($key);
+        }
+
+        return $confVal;
     }
 
     public function getAllConf()

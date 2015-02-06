@@ -20,9 +20,12 @@ class MurmurMeta
 
     private $version;
 
+    private $defaultConfCache;
+
     function __construct(MurmurIceProxy $iceProxy)
     {
         $this->murmurMeta = $iceProxy->getMeta();
+        $this->defaultConfCache = $this->getMurmurMeta()->getDefaultConf();
     }
 
     /**
@@ -44,9 +47,17 @@ class MurmurMeta
         return $this->version;
     }
 
-    public function getDefaultConf()
+    public function getDefaultConf($key = '')
     {
-        return $this->getMurmurMeta()->getDefaultConf();
+        if (empty($key)) {
+            return $this->defaultConfCache;
+        }
+
+        if (!isset($this->defaultConfCache[$key])) {
+            return null;
+        }
+
+        return $this->defaultConfCache[$key];
     }
 
 
@@ -55,7 +66,7 @@ class MurmurMeta
         $returnServers = [];
         $allServers = $this->getMurmurMeta()->getAllServers();
         foreach ($allServers as $key => $server) {
-            $returnServers[$key] = MurmurServer::fromIceObject($server);
+            $returnServers[$key] = MurmurServer::fromIceObject($server, $this);
         }
 
         return $returnServers;
@@ -66,7 +77,7 @@ class MurmurMeta
         $returnServers = [];
         $bootedServers = $this->getMurmurMeta()->getBootedServers();
         foreach ($bootedServers as $key => $server) {
-            $returnServers[$key] = MurmurServer::fromIceObject($server);
+            $returnServers[$key] = MurmurServer::fromIceObject($server, $this);
         }
 
         return $returnServers;
@@ -74,7 +85,7 @@ class MurmurMeta
 
     public function getServer($id)
     {
-        return MurmurServer::fromIceObject($this->getMurmurMeta()->getServer((int)$id));
+        return MurmurServer::fromIceObject($this->getMurmurMeta()->getServer((int)$id), $this);
     }
 
     public function createServer()
