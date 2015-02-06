@@ -1,0 +1,8 @@
+{% extends "ResourceBundle:Layout:web.html.twig" %}
+
+{% block meta_title %}Edit{%endblock %}
+
+{% block body %}
+    <h1 class="page-header"><a href="{{ path('hub.index') }}" class="back-link">&lt;</a> {{ server.name }} <small><strong>{{ server.countUsers }}</strong>/{{ server.maxUsers }}</small></h1>
+    <a href="{{ path('hub.control.startstop', {'serverId': server.id }) }}" class="btn btn-{% if server.isRunning %}danger{% else %}info{% endif %} btn-sm">{% if server.isRunning %}Arrêter{% else %}Démarrer{% endif %}</a>
+{% endblock %}

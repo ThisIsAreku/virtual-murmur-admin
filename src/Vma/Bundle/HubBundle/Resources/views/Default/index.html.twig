@@ -1,1 +1,11 @@
-Hello {{ name }}!
+{% extends "ResourceBundle:Layout:web.html.twig" %}
+
+{% block meta_title %}Hub{%endblock %}
+
+{% block body %}
+    <ul>
+    {% for server in allServers %}
+    <li><a href="{{ path('hub.edit', {'serverId': server.id}) }}" class="text-{% if server.isRunning %}success{% else %}danger{% endif %}">{{ server.name }}</a></li>
+    {% endfor %}
+    </ul>
+{% endblock %}
