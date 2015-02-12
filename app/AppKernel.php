@@ -14,6 +14,7 @@ class AppKernel extends Kernel
             new Symfony\Bundle\MonologBundle\MonologBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
+            new Swarrot\SwarrotBundle\SwarrotBundle(),
             new Vma\Bundle\MurmurBundle\MurmurBundle(),
             new Vma\Bundle\WebBundle\WebBundle(),
             new Vma\Bundle\HubBundle\HubBundle(),
