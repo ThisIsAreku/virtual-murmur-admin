@@ -32,6 +32,45 @@ class MurmurServer
         return new self(\Murmur_ServerPrxHelper::checkedCast($iceObject), $meta);
     }
 
+    public function getConnectedUsersByIds($ids)
+    {
+        if (!is_array($ids)) {
+            return $this->getConnectedUsersByIds([$ids]);
+        }
+
+        $result = [];
+        $connectedUsers = $this->getUsers();
+        /** @var \Murmur_User $user */
+        foreach ($connectedUsers as $user) {
+            if (!in_array($user->userid, $ids)) {
+                continue;
+            }
+
+            $result[$user->userid] = $user->session;
+        }
+
+        return $result;
+    }
+
+    public function getConnectedUsersByUserNames($userNames)
+    {
+        if (!is_array($userNames)) {
+            return $this->getConnectedUsersByIds([$userNames]);
+        }
+
+        $result = [];
+        $connectedUsers = $this->getUsers();
+        /** @var \Murmur_User $user */
+        foreach ($connectedUsers as $user) {
+            if (!in_array($user->name, $userNames)) {
+                continue;
+            }
+
+            $result[$user->name] = $user->session;
+        }
+
+        return $result;
+    }
 
     public function isRunning()
     {
@@ -220,12 +259,12 @@ class MurmurServer
 
     public function getUserNames($ids)
     {
-        // TODO: Implement getUserNames() method.
+        return $this->murmurServer->getUserNames($ids);
     }
 
     public function getUserIds($names)
     {
-        // TODO: Implement getUserIds() method.
+        return $this->murmurServer->getUserIds($names);
     }
 
     public function registerUser($info)
