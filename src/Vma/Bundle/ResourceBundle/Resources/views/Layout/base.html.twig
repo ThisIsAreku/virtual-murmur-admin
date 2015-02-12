@@ -30,7 +30,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <span class="navbar-brand">
-                    <a href="{{ path('web.index') }}">Virtual Murmur Admin {{ app_version }}</a> <small>Murmur {{ MurmurServerVersion }}</small>
+                    <a href="{{ path('web.index') }}"><span class="hidden-xs">Virtual Murmur Admin</span><span class="visible-xs">VMA</span></a>
                 </span>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
@@ -45,6 +45,10 @@
     </nav>
 
     {% block content %}{% endblock %}
+
+    <footer>
+        Virtual Murmur Admin {{ app_version }} <small>Murmur {{ MurmurServerVersion }}</small>
+    </footer>
 
     <script type="text/javascript" src="//code.jquery.com/jquery-2.1.3.min.js"></script>
     <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
