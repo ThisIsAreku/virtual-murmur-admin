@@ -6,6 +6,10 @@ class MurmurIceProxy
 {
     private $iceHost;
     private $iceSecret;
+
+    /**
+     * @var \Murmur_Meta $meta
+     */
     private $meta;
 
     function __construct($iceHost, $iceSecret, $sliceIncludeFile, $iceIncludePath = null)
@@ -19,11 +23,11 @@ class MurmurIceProxy
             if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
                 $separator = ';';
             }
-            set_include_path(get_include_path().$separator.$iceIncludePath);
+            set_include_path(get_include_path() . $separator . $iceIncludePath);
         }
 
         if (!file_exists($sliceIncludeFile)) {
-            die('Slice file is missing: '.$sliceIncludeFile);
+            die('Slice file is missing: ' . $sliceIncludeFile);
         }
 
         require_once 'Ice.php';
@@ -43,9 +47,7 @@ class MurmurIceProxy
             $this->loadIce34();
         }
 
-        if (!empty($this->iceSecret)) {
-            $this->meta = $this->meta->ice_context(['secret' => $this->iceSecret]);
-        }
+        $this->meta = $this->applyIceSecret($this->meta);
     }
 
     private function loadIce33()
@@ -76,6 +78,15 @@ class MurmurIceProxy
     public function getMeta()
     {
         return $this->meta;
+    }
+
+    public function applyIceSecret($meta)
+    {
+        if (!empty($this->iceSecret)) {
+            return $meta->ice_context(['secret' => $this->iceSecret]);
+        }
+
+        return $meta;
     }
 
 
