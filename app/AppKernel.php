@@ -18,6 +18,7 @@ class AppKernel extends Kernel
             new Vma\Bundle\WebBundle\WebBundle(),
             new Vma\Bundle\HubBundle\HubBundle(),
             new Vma\Bundle\ResourceBundle\ResourceBundle(),
+            new Vma\Bundle\UserBundle\UserBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

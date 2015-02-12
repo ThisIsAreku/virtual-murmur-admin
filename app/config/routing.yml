@@ -1,3 +1,11 @@
+user:
+    resource: "@UserBundle/Resources/config/routing.xml"
+    prefix:   /user
+
+login:
+    pattern:   /login
+    defaults:  { _controller: UserBundle:Default:login }
+
 hub:
     resource: "@HubBundle/Resources/config/routing.xml"
     prefix:   /hub

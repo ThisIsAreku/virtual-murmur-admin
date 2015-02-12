@@ -8,5 +8,17 @@ security:
             pattern: ^/(_(profiler|wdt|error)|css|images|js)/
             security: false
 
+        secured_area:
+            pattern: ^/(user|hub)/
+            anonymous: ~
+            form_login:
+                login_path:  /login
+                check_path:  /user/login_check
+
         default:
             anonymous: ~
+
+
+    access_control:
+        - { path: ^/hub, roles: ROLE_ADMIN }
+        - { path: ^/user, roles: ROLE_USER }
