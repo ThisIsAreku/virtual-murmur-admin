@@ -5,10 +5,16 @@
 
 {% block body %}
 <h1 class="page-header"><a href="{{ path('web.index') }}" class="back-link">&lt;</a> {{ server.name }} <small><strong>{{ server.countUsers }}</strong>/{{ server.maxUsers }}</small></h1>
-
-<ul class="fa-ul tree-list">
-    {{ murmur_tree_builder.full_tree(server.tree.children) }}
-</ul>
-
+    <div class="row">
+        <div class="col-md-6 col-md-push-6">
+            {{ server.getConf('welcometext')|raw }}
+            <br class="clearfix" /><br class="clearfix" />
+        </div>
+        <div class="col-md-6 col-md-pull-6">
+            <ul class="fa-ul tree-list">
+                {{ murmur_tree_builder.full_tree(server.tree.children) }}
+            </ul>
+        </div>
+    </div>
 {% endblock %}
 
