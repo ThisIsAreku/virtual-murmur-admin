@@ -99,6 +99,10 @@ class MurmurServer
 
     public function getName()
     {
+        if (!$this->isRunning()) {
+            return "Stopped server (".$this->getId().")";
+        }
+
         return $this->getRootChannel()->name;
     }
 
@@ -124,6 +128,10 @@ class MurmurServer
 
     public function getUsers()
     {
+        if (!$this->isRunning()) {
+            return [];
+        }
+
         return $this->murmurServer->getUsers();
     }
 
