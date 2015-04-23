@@ -45,7 +45,7 @@ gulp.task('stylesheets', function () {
 })
 
 gulp.task('images', function () {
-    gulp.src('images/*.jpg')
+    gulp.src(['images/*.jpg', 'images/front/*.jpg', 'images/*.png', 'images/front/*.png'])
         .pipe(plumber())
         .pipe(gulp.dest(images_path))
 })
