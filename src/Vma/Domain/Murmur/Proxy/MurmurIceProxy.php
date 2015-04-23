@@ -41,10 +41,11 @@ class MurmurIceProxy
 
     private function loadIce()
     {
+        if (class_exists("Ice_InitializationData")) {
+            $this->loadIce34();
+        } else
         if (!function_exists('Ice_intVersion') || Ice_intVersion() < 30400) {
             $this->loadIce33();
-        } else {
-            $this->loadIce34();
         }
 
         $this->meta = $this->applyIceSecret($this->meta);
