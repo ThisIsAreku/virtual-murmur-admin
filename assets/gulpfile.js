@@ -26,7 +26,7 @@ function createDirOrFail(path, callback) {
     })
 }
 
-gulp.task('default', ['stylesheets', 'js']);
+gulp.task('default', ['stylesheets', 'js', 'images']);
 gulp.task('first-deploy', ['create-tmp']);
 
 
@@ -45,9 +45,12 @@ gulp.task('stylesheets', function () {
 })
 
 gulp.task('images', function () {
-    gulp.src(['images/*.jpg', 'images/front/*.jpg', 'images/*.png', 'images/front/*.png'])
+    gulp.src(['images/*.jpg', 'images/*.png'])
         .pipe(plumber())
         .pipe(gulp.dest(images_path))
+    gulp.src(['images/front/*.jpg', 'images/front/*.png'])
+        .pipe(plumber())
+        .pipe(gulp.dest(images_path+'front/'))
 })
 
 gulp.task('js', function () {
