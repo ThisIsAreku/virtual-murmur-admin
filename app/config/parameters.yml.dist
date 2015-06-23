@@ -7,10 +7,12 @@ parameters:
 
 
     vma_ice_secret:    "hello"
-    vma_ice_host:      "Meta:tcp -h 127.0.0.1 -p 6502"
-    vma_ice_include:   "/usr/local/Cellar/ice/3.5.1/php"
+    vma_ice_host:      "Meta -e 1.0:tcp -h 127.0.0.1 -p 6502"
+    vma_ice_include:   "/usr/local/Cellar/ice/3.5.1_1/php"
 
     rabbitmq_host: "127.0.0.1"
     rabbitmq_port: 5672
     rabbitmq_login: "guest"
     rabbitmq_password: "guest"
+
+    admin_password: "admin"

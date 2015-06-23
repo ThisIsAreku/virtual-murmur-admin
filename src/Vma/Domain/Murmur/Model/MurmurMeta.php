@@ -26,9 +26,11 @@ class MurmurMeta
 
     function __construct(MurmurIceProxy $iceProxy)
     {
-        $this->proxy = $iceProxy;
-        $this->murmurMeta = $iceProxy->getMeta();
-        $this->defaultConfCache = $this->getMurmurMeta()->getDefaultConf();
+        if ($iceProxy->isReady()) {
+            $this->proxy = $iceProxy;
+            $this->murmurMeta = $iceProxy->getMeta();
+            $this->defaultConfCache = $this->getMurmurMeta()->getDefaultConf();
+        }
     }
 
     /**

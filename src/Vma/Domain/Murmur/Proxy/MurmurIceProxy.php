@@ -10,7 +10,7 @@ class MurmurIceProxy
     /**
      * @var \Murmur_Meta $meta
      */
-    private $meta;
+    private $meta = null;
 
     function __construct($iceHost, $iceSecret, $sliceIncludeFile, $iceIncludePath = null)
     {
@@ -36,7 +36,11 @@ class MurmurIceProxy
         $this->iceHost = $iceHost;
         $this->iceSecret = $iceSecret;
 
-        $this->loadIce();
+        try {
+            $this->loadIce();
+        } catch (\Ice_ConnectionRefusedException $e) {
+            echo 'Connection failed';
+        }
     }
 
     private function loadIce()
@@ -79,6 +83,11 @@ class MurmurIceProxy
     public function getMeta()
     {
         return $this->meta;
+    }
+
+    public function isReady()
+    {
+        return $this->getMeta() !== null;
     }
 
     public function applyIceSecret($meta)

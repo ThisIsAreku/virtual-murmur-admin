@@ -31,4 +31,10 @@ class DefaultController extends Controller
 
         return $this->render('WebBundle::view.html.twig', ['serverId' => $serverId, 'server' => $server]);
     }
+
+
+    public function loginAction()
+    {
+        return $this->render('WebBundle::login.html.twig');
+    }
 }

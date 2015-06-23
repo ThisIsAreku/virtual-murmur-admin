@@ -12,4 +12,15 @@
         <default key="_controller">WebBundle:Default:view</default>
         <requirement key="serverId">\d+</requirement>
     </route>
+
+
+    <route id="web.login" path="/login">
+        <default key="_controller">WebBundle:Default:login</default>
+    </route>
+
+    <route id="web.login.check" path="/login_check">
+    </route>
+
+    <route id="web.logout" path="/logout">
+    </route>
 </routes>
