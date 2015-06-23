@@ -15,7 +15,7 @@ class MurmurServerTree extends \Murmur_Tree
 
         ksort($this->children);
 
-        $this->c = $tree->c;
+        $this->c     = $tree->c;
         $this->users = $tree->users;
     }
 
@@ -45,6 +45,6 @@ class MurmurServerTree extends \Murmur_Tree
 
     public function getCollapsed()
     {
-        return $this->getNumUsersInSubtree() == 0;
+        return $this->getNumUsersInSubtree() === 0;
     }
 }

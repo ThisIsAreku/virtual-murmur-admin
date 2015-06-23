@@ -1,11 +1,11 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: alexandre
  * Date: 21/01/15
  * Time: 23:17
  */
-
 namespace Vma\Domain\Murmur\Model;
 
 use Murmur_Server;
@@ -13,14 +13,14 @@ use Murmur_Server;
 class MurmurServer
 {
 
-    /** @var \Murmur_Server */
+    /** @type \Murmur_Server */
     private $murmurServer = null;
-    private $murmurMeta = null;
+    private $murmurMeta   = null;
 
     private function __construct(\Ice_ObjectPrx $murmurServer, MurmurMeta $meta)
     {
         $this->murmurServer = $murmurServer;
-        $this->murmurMeta = $meta;
+        $this->murmurMeta   = $meta;
     }
 
     /**
@@ -38,11 +38,11 @@ class MurmurServer
             return $this->getConnectedUsersByIds([$ids]);
         }
 
-        $result = [];
+        $result         = [];
         $connectedUsers = $this->getUsers();
-        /** @var \Murmur_User $user */
+        /** @type \Murmur_User $user */
         foreach ($connectedUsers as $user) {
-            if (!in_array($user->userid, $ids)) {
+            if (!in_array($user->userid, $ids, true)) {
                 continue;
             }
 
@@ -58,11 +58,11 @@ class MurmurServer
             return $this->getConnectedUsersByIds([$userNames]);
         }
 
-        $result = [];
+        $result         = [];
         $connectedUsers = $this->getUsers();
-        /** @var \Murmur_User $user */
+        /** @type \Murmur_User $user */
         foreach ($connectedUsers as $user) {
-            if (!in_array($user->name, $userNames)) {
+            if (!in_array($user->name, $userNames, true)) {
                 continue;
             }
 
@@ -100,7 +100,7 @@ class MurmurServer
     public function getName()
     {
         if (!$this->isRunning()) {
-            return "Stopped server (".$this->getId().")";
+            return "Stopped server (" . $this->getId() . ")";
         }
 
         return $this->getRootChannel()->name;
@@ -237,7 +237,7 @@ class MurmurServer
 
     public function sendMessageChannel($channelid, $tree, $text)
     {
-        // TODO: Implement sendMessageChannel() method.
+        $this->murmurServer->sendMessageChannel($channelid, $tree, $text);
     }
 
     public function getACL($channelid, $acls, $groups, $inherit)

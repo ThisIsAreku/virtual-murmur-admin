@@ -1,11 +1,11 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: alexandre
  * Date: 21/01/15
  * Time: 23:26
  */
-
 namespace Vma\Domain\Murmur\Model;
 
 use Vma\Domain\Murmur\Proxy\MurmurIceProxy;
@@ -14,7 +14,7 @@ class MurmurMeta
 {
 
     /**
-     * @var \Murmur_Meta
+     * @type \Murmur_Meta
      */
     private $murmurMeta;
 
@@ -27,8 +27,8 @@ class MurmurMeta
     function __construct(MurmurIceProxy $iceProxy)
     {
         if ($iceProxy->isReady()) {
-            $this->proxy = $iceProxy;
-            $this->murmurMeta = $iceProxy->getMeta();
+            $this->proxy            = $iceProxy;
+            $this->murmurMeta       = $iceProxy->getMeta();
             $this->defaultConfCache = $this->getMurmurMeta()->getDefaultConf();
         }
     }
@@ -43,7 +43,7 @@ class MurmurMeta
 
     public function getVersion()
     {
-        if ($this->version == null) {
+        if ($this->version === null) {
             $major = $minor = $patch = $text = 0;
             $this->getMurmurMeta()->getVersion($major, $minor, $patch, $text);
             $this->version = $major . '.' . $minor . '.' . $patch . ' (' . $text . ')';
@@ -69,9 +69,9 @@ class MurmurMeta
     public function getAllServers()
     {
         $returnServers = [];
-        $allServers = $this->getMurmurMeta()->getAllServers();
+        $allServers    = $this->getMurmurMeta()->getAllServers();
         foreach ($allServers as $key => $server) {
-            $server = $this->proxy->applyIceSecret($server);
+            $server              = $this->proxy->applyIceSecret($server);
             $returnServers[$key] = MurmurServer::fromIceObject($server, $this);
         }
 
@@ -83,7 +83,7 @@ class MurmurMeta
         $returnServers = [];
         $bootedServers = $this->getMurmurMeta()->getBootedServers();
         foreach ($bootedServers as $key => $server) {
-            $server = $this->proxy->applyIceSecret($server);
+            $server              = $this->proxy->applyIceSecret($server);
             $returnServers[$key] = MurmurServer::fromIceObject($server, $this);
         }
 

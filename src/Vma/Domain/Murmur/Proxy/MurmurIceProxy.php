@@ -8,7 +8,7 @@ class MurmurIceProxy
     private $iceSecret;
 
     /**
-     * @var \Murmur_Meta $meta
+     * @type \Murmur_Meta $meta
      */
     private $meta = null;
 
@@ -33,7 +33,7 @@ class MurmurIceProxy
         require_once 'Ice.php';
         require_once $sliceIncludeFile;
 
-        $this->iceHost = $iceHost;
+        $this->iceHost   = $iceHost;
         $this->iceSecret = $iceSecret;
 
         try {
@@ -61,7 +61,7 @@ class MurmurIceProxy
         Ice_loadProfile();
 
         try {
-            $conn = $ICE->stringToProxy($this->iceHost);
+            $conn       = $ICE->stringToProxy($this->iceHost);
             $this->meta = $conn->ice_checkedCast('::Murmur::Meta');
         } catch (\Ice_ProxyParseException $e) {
             echo $e->getMessage();
@@ -70,13 +70,13 @@ class MurmurIceProxy
 
     private function loadIce34()
     {
-        $initData = new \Ice_InitializationData();
+        $initData             = new \Ice_InitializationData();
         $initData->properties = Ice_createProperties();
         $initData->properties->setProperty('Ice.ImplicitContext', 'Shared');
         $initData->properties->setProperty('Ice.Default.EncodingVersion', '1.0');
         $ICE = Ice_initialize($initData);
 
-        $proxy = $ICE->stringToProxy($this->iceHost);
+        $proxy      = $ICE->stringToProxy($this->iceHost);
         $this->meta = \Murmur_MetaPrxHelper::checkedCast($proxy);
     }
 

@@ -1,11 +1,11 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: alexandre
  * Date: 06/02/15
  * Time: 18:35
  */
-
 namespace Vma\Bundle\HubBundle\Controller;
 
 
@@ -20,7 +20,7 @@ class ControlController extends Controller
         $murmurMeta = $this->get('murmur.meta');
 
 //        try {
-            /** @var MurmurServer $server */
+            /** @type MurmurServer $server */
             $server = $murmurMeta->getServer($serverId);
             if ($server->isRunning()) {
                 $server->stop();
