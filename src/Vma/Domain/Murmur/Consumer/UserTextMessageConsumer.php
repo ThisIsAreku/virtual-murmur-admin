@@ -35,7 +35,7 @@ class UserTextMessageConsumer implements ProcessorInterface
 
         $serverId = empty($data['server_id']) ? 1 : intval($data['server_id']);
 
-        /** @var MurmurServer $server */
+        /** @type MurmurServer $server */
         $server = null;
         try {
             $server = $this->murmurMeta->getServer($serverId);
@@ -51,7 +51,7 @@ class UserTextMessageConsumer implements ProcessorInterface
                 $userNames = [$userNames];
             }
 
-            $userNames = $server->getConnectedUsersByUserNames($userNames);
+            $userNames       = $server->getConnectedUsersByUserNames($userNames);
             $target_sessions = array_merge($target_sessions, array_values($userNames));
         }
 
@@ -61,7 +61,7 @@ class UserTextMessageConsumer implements ProcessorInterface
                 $userIds = [$userIds];
             }
 
-            $userIds = $server->getConnectedUsersByIds($userIds);
+            $userIds         = $server->getConnectedUsersByIds($userIds);
             $target_sessions = array_merge($target_sessions, array_values($userIds));
         }
 

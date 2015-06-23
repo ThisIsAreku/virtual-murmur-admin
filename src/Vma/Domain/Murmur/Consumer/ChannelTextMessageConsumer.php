@@ -27,5 +27,23 @@ class ChannelTextMessageConsumer implements ProcessorInterface
     public function process(Message $message, array $options)
     {
         $data = json_decode($message->getBody(), true);
+
+        if (empty($data['message'])) {
+            return;
+        }
+
+        $serverId  = empty($data['server_id']) ? 1 : intval($data['server_id']);
+        $channelId = empty($data['channel_id']) ? 1 : intval($data['channel_id']);
+        $tree      = empty($data['tree']) ? false : intval($data['server_id']);
+
+        /** @type MurmurServer $server */
+        $server = null;
+        try {
+            $server = $this->murmurMeta->getServer($serverId);
+        } catch (\Exception $e) {
+            return;
+        }
+
+        $server->sendMessageChannel($channelId, $tree, $data['message']);
     }
 }
