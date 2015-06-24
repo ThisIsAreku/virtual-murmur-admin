@@ -76,7 +76,7 @@ class MurmurIceProxy
 
     public function getMeta()
     {
-        if ($this->meta == null) {
+        if ($this->meta === null) {
             $this->loadIce();
         }
 

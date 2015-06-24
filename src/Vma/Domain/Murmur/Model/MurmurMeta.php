@@ -44,7 +44,7 @@ class MurmurMeta
 
     public function getDefaultConf($key = '')
     {
-        if ($this->defaultConfCache == null) {
+        if ($this->defaultConfCache === null) {
             $this->defaultConfCache = $this->getMurmurMeta()->getDefaultConf();
         }
 

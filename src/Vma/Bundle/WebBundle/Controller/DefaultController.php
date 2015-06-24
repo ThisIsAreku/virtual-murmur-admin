@@ -10,7 +10,7 @@ class DefaultController extends Controller
     public function indexAction()
     {
         $murmurMeta = $this->get('murmur.meta');
-        if ($murmurMeta == null) {
+        if ($murmurMeta === null) {
             throw new \Exception();
         }
 
@@ -22,7 +22,7 @@ class DefaultController extends Controller
     public function viewAction($serverId)
     {
         $murmurMeta = $this->get('murmur.meta');
-        if ($murmurMeta == null) {
+        if ($murmurMeta === null) {
             throw new \Exception();
         }
 

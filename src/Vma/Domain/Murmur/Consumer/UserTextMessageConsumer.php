@@ -2,11 +2,11 @@
 
 namespace Vma\Domain\Murmur\Consumer;
 
+use Psr\Log\LoggerInterface;
 use Swarrot\Broker\Message;
 use Swarrot\Processor\ProcessorInterface;
 use Vma\Domain\Murmur\Model\MurmurMeta;
 use Vma\Domain\Murmur\Model\MurmurServer;
-use Psr\Log\LoggerInterface;
 
 class UserTextMessageConsumer implements ProcessorInterface
 {

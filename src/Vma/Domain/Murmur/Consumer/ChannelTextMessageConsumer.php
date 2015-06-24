@@ -2,10 +2,10 @@
 
 namespace Vma\Domain\Murmur\Consumer;
 
+use Psr\Log\LoggerInterface;
 use Swarrot\Broker\Message;
 use Swarrot\Processor\ProcessorInterface;
 use Vma\Domain\Murmur\Model\MurmurMeta;
-use Psr\Log\LoggerInterface;
 
 class ChannelTextMessageConsumer implements ProcessorInterface
 {
