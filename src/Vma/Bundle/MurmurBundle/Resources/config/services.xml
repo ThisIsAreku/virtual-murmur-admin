@@ -27,9 +27,11 @@
 
         <service id="consumers.text_message.channel" class="Vma\Domain\Murmur\Consumer\ChannelTextMessageConsumer">
             <argument id="murmur.meta" type="service" />
+            <argument id="logger" type="service" />
         </service>
         <service id="consumers.text_message.user" class="Vma\Domain\Murmur\Consumer\UserTextMessageConsumer">
             <argument id="murmur.meta" type="service" />
+            <argument id="logger" type="service" />
         </service>
     </services>
 </container>

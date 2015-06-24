@@ -6,15 +6,18 @@ use Swarrot\Broker\Message;
 use Swarrot\Processor\ProcessorInterface;
 use Vma\Domain\Murmur\Model\MurmurMeta;
 use Vma\Domain\Murmur\Model\MurmurServer;
+use Psr\Log\LoggerInterface;
 
 class UserTextMessageConsumer implements ProcessorInterface
 {
 
     private $murmurMeta;
+    private $logger;
 
-    public function __construct(MurmurMeta $murmurMeta)
+    public function __construct(MurmurMeta $murmurMeta, LoggerInterface $logger)
     {
         $this->murmurMeta = $murmurMeta;
+        $this->logger     = $logger;
     }
 
     /**
@@ -30,7 +33,8 @@ class UserTextMessageConsumer implements ProcessorInterface
         $data = json_decode($message->getBody(), true);
 
         if (empty($data['message'])) {
-            return;
+            $this->logger and $this->logger->warn("Dropped empty message", $data);
+            return false;
         }
 
         $serverId = empty($data['server_id']) ? 1 : intval($data['server_id']);
@@ -40,7 +44,8 @@ class UserTextMessageConsumer implements ProcessorInterface
         try {
             $server = $this->murmurMeta->getServer($serverId);
         } catch (\Exception $e) {
-            return;
+            $this->logger and $this->logger->error("Cannot connect to server", ['exception' => $e, 'data' => $data]);
+            return false;
         }
 
         $target_sessions = [];
