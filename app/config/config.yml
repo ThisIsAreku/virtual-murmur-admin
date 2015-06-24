@@ -45,12 +45,12 @@ swarrot:
             password: "%rabbitmq_password%"
             vhost: 'vma'
     processors_stack:
-        signal_handler: 'Swarrot\Processor\SignalHandler\SignalHandlerProcessor'
+        # signal_handler: 'Swarrot\Processor\SignalHandler\SignalHandlerProcessor'
         ack: 'Swarrot\Processor\Ack\AckProcessor'
-        max_messages: 'Swarrot\Processor\MaxMessages\MaxMessagesProcessor'
-        retry: 'Swarrot\Processor\Retry\RetryProcessor'
+        # max_messages: 'Swarrot\Processor\MaxMessages\MaxMessagesProcessor'
+        # retry: 'Swarrot\Processor\Retry\RetryProcessor'
         exception_catcher: 'Swarrot\Processor\ExceptionCatcher\ExceptionCatcherProcessor'
-        max_execution_time: 'Swarrot\Processor\MaxExecutionTime\MaxExecutionTimeProcessor'
+        # max_execution_time: 'Swarrot\Processor\MaxExecutionTime\MaxExecutionTimeProcessor'
     consumers:
         channel_text_message:
             processor: consumers.text_message.channel

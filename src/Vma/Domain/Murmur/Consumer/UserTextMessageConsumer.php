@@ -79,6 +79,11 @@ class UserTextMessageConsumer implements ProcessorInterface
             $target_sessions = array_merge($target_sessions, $sessions);
         }
 
+        if (empty($target_sessions)) {
+            $this->logger and $this->logger->warn("No target users, retrying later", ['data' => $data]);
+            return false;
+        }
+
         foreach ($target_sessions as $session) {
             $server->sendMessage($session, $data['message']);
         }

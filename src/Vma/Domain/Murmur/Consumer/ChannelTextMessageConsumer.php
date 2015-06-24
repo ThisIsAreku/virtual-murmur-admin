@@ -38,8 +38,8 @@ class ChannelTextMessageConsumer implements ProcessorInterface
         }
 
         $serverId  = empty($data['server_id']) ? 1 : intval($data['server_id']);
-        $channelId = empty($data['channel_id']) ? 1 : intval($data['channel_id']);
-        $tree      = empty($data['tree']) ? false : intval($data['server_id']);
+        $channelId = empty($data['channel_id']) ? 0 : intval($data['channel_id']);
+        $tree      = empty($data['tree']) ? false : (bool)$data['tree'];
 
         /** @type MurmurServer $server */
         $server = null;
