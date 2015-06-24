@@ -35,12 +35,6 @@ class MurmurIceProxy
 
         $this->iceHost   = $iceHost;
         $this->iceSecret = $iceSecret;
-
-        try {
-            $this->loadIce();
-        } catch (\Ice_ConnectionRefusedException $e) {
-            echo 'Connection failed';
-        }
     }
 
     private function loadIce()
@@ -82,6 +76,10 @@ class MurmurIceProxy
 
     public function getMeta()
     {
+        if ($this->meta == null) {
+            $this->loadIce();
+        }
+
         return $this->meta;
     }
 

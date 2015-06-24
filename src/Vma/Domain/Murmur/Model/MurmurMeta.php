@@ -12,25 +12,15 @@ use Vma\Domain\Murmur\Proxy\MurmurIceProxy;
 
 class MurmurMeta
 {
+    private $version = null;
 
-    /**
-     * @type \Murmur_Meta
-     */
-    private $murmurMeta;
-
-    private $version;
-
-    private $defaultConfCache;
+    private $defaultConfCache = null;
 
     private $proxy;
 
     function __construct(MurmurIceProxy $iceProxy)
     {
-        if ($iceProxy->isReady()) {
-            $this->proxy            = $iceProxy;
-            $this->murmurMeta       = $iceProxy->getMeta();
-            $this->defaultConfCache = $this->getMurmurMeta()->getDefaultConf();
-        }
+        $this->proxy = $iceProxy;
     }
 
     /**
@@ -38,7 +28,7 @@ class MurmurMeta
      */
     public function getMurmurMeta()
     {
-        return $this->murmurMeta;
+        return $this->proxy->getMeta();
     }
 
     public function getVersion()
@@ -54,6 +44,10 @@ class MurmurMeta
 
     public function getDefaultConf($key = '')
     {
+        if ($this->defaultConfCache == null) {
+            $this->defaultConfCache = $this->getMurmurMeta()->getDefaultConf();
+        }
+
         if (empty($key)) {
             return $this->defaultConfCache;
         }
