@@ -44,9 +44,21 @@
         </div>
     </nav>
 
+{% if app.session.flashbag|length > 0 %}
+    <div class="container flash-container">
+        {% for label, flashes in app.session.flashbag.all %}
+            {% for flash in flashes %}
+                <div class="alert alert-{{ label }}">
+                    {{ flash }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+    </div>
+{% endif %}
+
     {% block content %}{% endblock %}
 
-    <footer>
+    <footer class="footer">
         Virtual Murmur Admin {{ app_version }} <small>Murmur {{ MurmurServerVersion }}</small>
     </footer>
 

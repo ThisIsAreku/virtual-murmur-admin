@@ -8,16 +8,30 @@
         <default key="_controller">HubBundle:Default:index</default>
     </route>
 
-    <route id="hub.edit" path="/edit/{serverId}">
-        <default key="_controller">HubBundle:Default:edit</default>
-        <requirement key="serverId">\d+</requirement>
-    </route>
-
-    <route id="hub.conf" path="/conf">
+    <route id="hub.global_conf" path="/conf">
         <default key="_controller">HubBundle:Default:conf</default>
     </route>
 
-    <route id="hub.control.startstop" path="/control/startstop/{serverId}">
+    <route id="hub.view" path="/s/{serverId}/view">
+        <default key="_controller">HubBundle:Default:view</default>
+        <requirement key="serverId">\d+</requirement>
+    </route>
+
+    <route id="hub.conf" path="/s/{serverId}/conf">
+        <default key="_controller">HubBundle:Default:serverConf</default>
+    </route>
+
+    <route id="hub.message.channel" path="s/{serverId}/message/channel">
+        <default key="_controller">HubBundle:Default:messageChannel</default>
+        <requirement key="serverId">\d+</requirement>
+    </route>
+
+    <route id="hub.message.user" path="s/{serverId}/message/user">
+        <default key="_controller">HubBundle:Default:messageUser</default>
+        <requirement key="serverId">\d+</requirement>
+    </route>
+
+    <route id="hub.control.startstop" path="s/{serverId}/startstop">
         <default key="_controller">HubBundle:Control:startstop</default>
         <requirement key="serverId">\d+</requirement>
     </route>

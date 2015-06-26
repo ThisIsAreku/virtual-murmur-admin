@@ -123,7 +123,7 @@ class MurmurServer
 
     public function setConf($key, $value)
     {
-        return $this->murmurServer->getConf($key, $value);
+        return $this->murmurServer->setConf($key, $value);
     }
 
     public function getUsers()

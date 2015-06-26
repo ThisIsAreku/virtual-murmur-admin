@@ -4,13 +4,24 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
-    <!--
     <services>
-        <service id="hub.example" class="Vma\Bundle\HubBundle\Example">
-            <argument type="service" id="service_id" />
-            <argument>plain_value</argument>
-            <argument>%parameter_name%</argument>
+        <service id="vma.processor.channel_message" class="Vma\Domain\Murmur\Processor\ChannelMessageProcessor">
+            <argument type="service" id="jms_serializer" />
+            <argument type="service" id="swarrot.publisher" />
+            <argument type="service" id="logger" />
+        </service>
+        <service id="vma.processor.edit_configuration" class="Vma\Domain\Murmur\Processor\EditConfigurationProcessor">
+            <argument type="service" id="murmur.meta" />
+            <argument type="service" id="logger" />
+        </service>
+
+        <!-- Form Type -->
+        <service id="vma.form.type.channel_message" class="Vma\Domain\Murmur\Form\Type\ChannelMessageFormType">
+            <tag name="form.type" alias="channel_message" />
+        </service>
+        <service id="vma.form.type.edit_configuration" class="Vma\Domain\Murmur\Form\Type\EditConfigurationFormType">
+            <tag name="form.type" alias="edit_configuration" />
         </service>
     </services>
-    -->
+
 </container>

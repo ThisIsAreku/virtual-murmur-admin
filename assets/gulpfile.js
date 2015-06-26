@@ -14,6 +14,17 @@ var stylesheets_path = web_path+'stylesheets/';
 var javascripts_path = web_path+'javascripts/';
 var images_path = web_path+'images/';
 
+var js_sources = {
+    'web.js': [
+        'javascripts/web.js',
+        'javascripts/tree.js'
+    ],
+    'hub.js': [
+        'javascripts/hub.js',
+        'javascripts/tree.js'
+    ],
+}
+
 function createDirOrFail(path, callback) {
     fs.mkdir(path, function (err) {
         if (err != null && err.code != 'EEXIST') {
@@ -54,9 +65,11 @@ gulp.task('images', function () {
 })
 
 gulp.task('js', function () {
-     gulp.src(['javascripts/web.js'])
-         .pipe(concat('web.js', {newLine: ';'}))
-         .pipe(gulp.dest(javascripts_path))
+    Object.keys(js_sources).forEach(function (key) {
+        gulp.src(js_sources[key])
+            .pipe(concat(key, {newLine: ';'}))
+            .pipe(gulp.dest(javascripts_path))
+    });
 })
 
 gulp.task('watch', ['default'], function (){

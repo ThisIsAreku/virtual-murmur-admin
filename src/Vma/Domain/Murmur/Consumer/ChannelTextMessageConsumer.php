@@ -30,7 +30,6 @@ class ChannelTextMessageConsumer implements ProcessorInterface
     public function process(Message $message, array $options)
     {
         $data = json_decode($message->getBody(), true);
-        var_dump($data);
 
         if (empty($data['message'])) {
             $this->logger and $this->logger->warn("Dropped empty message", $data);
@@ -39,7 +38,7 @@ class ChannelTextMessageConsumer implements ProcessorInterface
 
         $serverId  = empty($data['server_id']) ? 1 : intval($data['server_id']);
         $channelId = empty($data['channel_id']) ? 0 : intval($data['channel_id']);
-        $tree      = empty($data['tree']) ? false : (bool)$data['tree'];
+        $recursive = empty($data['recursive']) ? false : (bool)$data['recursive'];
 
         /** @type MurmurServer $server */
         $server = null;
@@ -49,10 +48,9 @@ class ChannelTextMessageConsumer implements ProcessorInterface
             $this->logger and $this->logger->error("Cannot connect to server", ['exception' => $e, 'data' => $data]);
             return false;
         }
-        var_dump([
-            $channelId, $tree, $data['message']
-        ]);
 
-        $server->sendMessageChannel($channelId, $tree, $data['message']);
+
+        $server->sendMessageChannel($channelId, $recursive, $data['message']);
+        $this->logger and $this->logger->info("Message sent to " . $serverId . ':' . $channelId, ['exception' => $e, 'data' => $data]);
     }
 }

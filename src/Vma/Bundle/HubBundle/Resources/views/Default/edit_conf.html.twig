@@ -1,0 +1,32 @@
+{% extends "ResourceBundle:Layout:hub.html.twig" %}
+
+{% block meta_title %}Conf{%endblock %}
+
+{% block body %}
+    {% if server is defined %}
+        {% set conf = server.allConf %}
+        <h1 class="page-header"><a href="{{ path('hub.view', {'serverId': server.id}) }}" class="back-link">&lt;</a> {{ server.name }} <small><strong>{{ server.countUsers }}</strong>/{{ server.maxUsers }}</small></h1>
+    {% endif %}
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
+        <div class="row">
+            <div class="col-md-6">
+                {{ form_row(form.configuration) }}
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Nouvelle clée</label>
+                    <input type="text" id="add-config-key" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Nouvelle valeur</label>
+                    <input type="text" id="add-config-value" class="form-control">
+                </div>
+                <button type="button" class="btn btn-default" id="add-config-submit">Ajouter une clée</button>
+                <div id="form-new-config" data-key="{{ form.configuration.vars.full_name }}">
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-sm">Envoyer</button>
+    {{ form_end(form) }}
+{% endblock %}

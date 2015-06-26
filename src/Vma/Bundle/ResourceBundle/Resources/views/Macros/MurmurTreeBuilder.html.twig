@@ -40,3 +40,33 @@
         </li>
     {% endfor %}
 {% endmacro %}
+
+{% macro checkbox_full_tree(tree, form) %}
+    {% for treeEntry in tree %}
+        <li id="channel-{{ treeEntry.c.id }}" class="channel">
+            {% if treeEntry.hasSubContent %}
+                <i class="fa-li fa fa-caret-{% if not treeEntry.collapsed %}down{% else %}right{% endif %} collapse-caret"></i>
+            {% endif %}
+            <input type="checkbox" name="{{ form.vars.full_name }}[]" class="checkbox-{{ form.vars.full_name }}" value="{{ treeEntry.c.id }}"  {% if treeEntry.c.id in form.vars.value %}checked="checked"{% endif %} />&nbsp;<a href="#" class="channel-header"{% if treeEntry.hasSubContent %} data-toggle="collapse" data-target="#channel-{{ treeEntry.c.id }}>.data"{% endif %}>{{ treeEntry.c.name }}{% if treeEntry.numUsersInSubtree > 0 %} ({{ treeEntry.numUsersInSubtree }}){% endif %}</a>
+        {% if treeEntry.c.description %}
+            <i class="fa fa-info-circle channel-description" data-title="{{ treeEntry.c.description }}"></i>
+        {% endif %}
+        {% if treeEntry.hasSubContent %}
+            <div class="data collapse{% if not treeEntry.collapsed %} in{% endif %}">
+            {% if treeEntry.users %}
+                <ul class="channel-users">
+                    {% for user in treeEntry.users %}
+                        <li>{{ user.name }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+            {% if treeEntry.children %}
+                <ul class="fa-ul channel-children">
+                    {{ _self.checkbox_full_tree(treeEntry.children, form) }}
+                </ul>
+            {% endif %}
+            </div>
+            {% endif %}
+        </li>
+    {% endfor %}
+{% endmacro %}

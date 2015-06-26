@@ -1,7 +1,22 @@
-{% extends "ResourceBundle:Layout:web.html.twig" %}
+{% extends "ResourceBundle:Layout:hub.html.twig" %}
 
 {% block meta_title %}Conf{%endblock %}
 
 {% block body %}
-    {{ dump(conf) }}
+    {% if server is defined %}
+        {% set conf = server.allConf %}
+        <h1 class="page-header"><a href="{{ path('hub.view', {'serverId': server.id}) }}" class="back-link">&lt;</a> {{ server.name }} <small><strong>{{ server.countUsers }}</strong>/{{ server.maxUsers }}</small></h1>
+    {% endif %}
+    <table class="table table-condensed table-bordered">
+        <tr>
+            <th>Clée</th>
+            <th>Valeur</th>
+        </tr>
+        {% for key, value in conf %}
+        <tr>
+            <td>{{ key }}</td>
+            <td>{{ value }}</td>
+        </tr>
+        {% endfor %}
+    </table>
 {% endblock %}

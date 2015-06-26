@@ -1,0 +1,29 @@
+{% extends "ResourceBundle:Layout:hub.html.twig" %}
+{% form_theme form _self %}
+
+{% block meta_title %}Message::channel{%endblock %}
+
+{% block _form_channelIds_widget %}
+    {% import "ResourceBundle:Macros:MurmurTreeBuilder.html.twig" as murmur_tree_builder %}
+    <ul class="fa-ul tree-list">
+        {{ murmur_tree_builder.checkbox_full_tree([form.parent.vars.data.server.tree], form) }}
+    </ul>
+{% endblock %}
+
+{% block body %}
+    <h1 class="page-header"><a href="{{ path('hub.view', {'serverId': server.id}) }}" class="back-link">&lt;</a> {{ server.name }} <small><strong>{{ server.countUsers }}</strong>/{{ server.maxUsers }}</small></h1>
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
+        <div class="row">
+            <div class="col-md-6">
+                {{ form_widget(form.channelIds) }}
+            </div>
+            <div class="col-md-6">
+                {{ form_row(form.message) }}
+                {{ form_row(form.async) }}
+                {{ form_row(form.recursive) }}
+                <button type="submit" class="btn btn-primary btn-sm">Envoyer</button>
+            </div>
+        </div>
+    {{ form_end(form) }}
+{% endblock %}

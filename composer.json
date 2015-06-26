@@ -21,7 +21,8 @@
         "doctrine/doctrine-migrations-bundle": "dev-master",
         "doctrine/migrations": "dev-master",
         "ramsey/uuid": "^2.8",
-        "friendsofsymfony/user-bundle": "dev-master"
+        "friendsofsymfony/user-bundle": "dev-master",
+        "jms/serializer-bundle": "^1.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",

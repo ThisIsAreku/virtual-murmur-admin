@@ -1,0 +1,21 @@
+{% extends "ResourceBundle:Layout:hub.html.twig" %}
+
+{% block meta_title %}Message::user{%endblock %}
+
+{% block body %}
+    <h1 class="page-header"><a href="{{ path('hub.view', {'serverId': server.id}) }}" class="back-link">&lt;</a> {{ server.name }} <small><strong>{{ server.countUsers }}</strong>/{{ server.maxUsers }}</small></h1>
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
+        <div class="row">
+            <div class="col-md-6">
+                {{ form_widget(form.channelIds) }}
+            </div>
+            <div class="col-md-6">
+                {{ form_row(form.message) }}
+                {{ form_row(form.async) }}
+                {{ form_row(form.recursive) }}
+                <button type="submit" class="btn btn-primary btn-sm">Envoyer</button>
+            </div>
+        </div>
+    {{ form_end(form) }}
+{% endblock %}

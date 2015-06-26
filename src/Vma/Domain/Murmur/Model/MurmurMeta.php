@@ -8,6 +8,7 @@
  */
 namespace Vma\Domain\Murmur\Model;
 
+use Murmur_ServerCallback;
 use Vma\Domain\Murmur\Proxy\MurmurIceProxy;
 
 class MurmurMeta
@@ -97,14 +98,14 @@ class MurmurMeta
         return $this->getMurmurMeta()->newServer();
     }
 
-    public function addCallback($cb)
+    public function addCallback(Murmur_ServerCallback $cb)
     {
-        // TODO: Implement addCallback() method.
+        return $this->getMurmurMeta()->addCallback($cb);
     }
 
-    public function removeCallback($cb)
+    public function removeCallback(Murmur_ServerCallback $cb)
     {
-        // TODO: Implement removeCallback() method.
+        return $this->getMurmurMeta()->removeCallback($cb);
     }
 
     public function getUptime()
