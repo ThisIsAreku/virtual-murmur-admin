@@ -62,17 +62,34 @@ class DefaultController extends Controller
         return $this->render('HubBundle:Default:view.html.twig', ['serverId' => $serverId, 'server' => $server]);
     }
 
-    public function logsAction($serverId)
+    public function logsAction($serverId, $page)
     {
         $murmurMeta = $this->get('murmur.meta');
+        $logPerPages = 20;
 
         try {
             $server = $murmurMeta->getServer($serverId);
         } catch (\Exception $e) {
             throw new NotFoundHttpException();
         }
+        $maxPages = ceil($server->getLogLen() / $logPerPages);
 
-        return $this->render('HubBundle:Default:logs.html.twig', ['serverId' => $serverId, 'server' => $server]);
+        if ($page <= 0) {
+            $page = 1;
+        }
+        if ($page >= $maxPages) {
+            $page = $maxPages;
+        }
+
+        $logs = $server->getLog(($page-1)*$logPerPages, $logPerPages);
+
+        return $this->render('HubBundle:Default:logs.html.twig', [
+            'serverId' => $serverId,
+            'server'   => $server,
+            'page'     => $page,
+            'logs'     => $logs,
+            'maxPages' => $maxPages,
+        ]);
     }
 
     public function messageChannelAction(Request $request, $serverId)

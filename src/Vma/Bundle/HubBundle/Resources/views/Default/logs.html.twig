@@ -10,12 +10,21 @@
             <th>Date</th>
             <th>Log</th>
         </tr>
-        {% for log in server.getLog(0, server.getLogLen()) %}
+        {% for log in logs %}
             <tr>
                 <td>{{ log.timestamp|date('d/m/Y H:i:s') }}</td>
                 <td>{{ log.txt }}</td>
             </tr>
         {% endfor %}
     </table>
+    <div class="text-center">
+        <nav>
+            <ul class="pagination">
+            {% for i in max(1,page-5)..min(page+5, maxPages) %}
+                <li {{ i == page ? 'class="active"' : '' }}><a href="{{ path('hub.logs', {serverId: serverId, page: i}) }}">{{ i }}</a></li>
+            {% endfor %}
+            </ul>
+        </nav>
+    </div>
 {% endblock %}
 

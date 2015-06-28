@@ -337,9 +337,9 @@ class MurmurServer
         return $this->murmurServer->getUptime();
     }
 
-    public function getLog($first = 0, $last)
+    public function getLog($first, $last)
     {
-        return $this->murmurServer->getLog($first = 0, $last);
+        return $this->murmurServer->getLog($first, $last);
     }
 
     public function getLogLen()
