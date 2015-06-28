@@ -16,6 +16,7 @@ class MurmurServer
     /** @type \Murmur_Server */
     private $murmurServer = null;
     private $murmurMeta   = null;
+    private $channelCache = [];
 
     private function __construct(\Ice_ObjectPrx $murmurServer, MurmurMeta $meta)
     {
@@ -148,6 +149,22 @@ class MurmurServer
     public function getChannels()
     {
         return $this->murmurServer->getChannels();
+    }
+
+    public function getChannelById($id)
+    {
+        if (isset($this->channelCache[$id])) {
+            return $this->channelCache[$id];
+        }
+
+        foreach($this->murmurServer->getChannels() as $channel) {
+            if ($channel->id == $id) {
+                $this->channelCache[$id] = $channel;
+                return $channel;
+            }
+        }
+
+        return null;
     }
 
     public function getRootChannel()

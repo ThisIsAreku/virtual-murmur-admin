@@ -17,11 +17,15 @@ var images_path = web_path+'images/';
 var js_sources = {
     'web.js': [
         'javascripts/web.js',
-        'javascripts/tree.js'
+        'javascripts/general.js',
+        'javascripts/tree.js',
+        'javascripts/timestamp.js'
     ],
     'hub.js': [
         'javascripts/hub.js',
-        'javascripts/tree.js'
+        'javascripts/general.js',
+        'javascripts/tree.js',
+        'javascripts/timestamp.js'
     ],
 }
 

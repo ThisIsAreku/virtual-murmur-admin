@@ -1,9 +1,101 @@
 {% extends "ResourceBundle:Layout:hub.html.twig" %}
+{% import "ResourceBundle:Macros:MurmurTreeBuilder.html.twig" as murmur_tree_builder %}
 
 {% block meta_title %}Edit{%endblock %}
 
 {% block body %}
+    <a href="{{ path('hub.control.startstop', {'serverId': server.id }) }}" class="pull-right btn btn-{{ server.isRunning ? 'danger' : 'info' }}">{{ server.isRunning ? 'Arrêter' : 'Démarrer' }}</a>
     <h1 class="page-header"><a href="{{ path('hub.index') }}" class="back-link">&lt;</a> {{ server.name }} <small><strong>{{ server.countUsers }}</strong>/{{ server.maxUsers }}</small></h1>
-    <a href="{{ path('hub.control.startstop', {'serverId': server.id }) }}" class="btn btn-{% if server.isRunning %}danger{% else %}info{% endif %}">{% if server.isRunning %}Arrêter{% else %}Démarrer{% endif %}</a>
-    <a href="{{ path('hub.message.channel', {'serverId': server.id }) }}" class="btn btn-primary">Message</a>
+    <div class="row">
+        <div class="col-md-12">
+            <a href="{{ path('hub.message.channel', {'serverId': server.id }) }}" class="btn btn-primary">Message</a>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+    {% for user in server.users %}
+        <div class="col-md-6">
+            <div class="panel panel-{{ user.tcponly ? 'danger' : 'default' }}">
+                <div class="panel-heading">
+                    <div class="pull-right icons">
+                        <i class="fa fa-fw fa-{{ user.userid == -1 ? 'un' : '' }}lock" data-toggle="tooltip" title="{{ user.userid }}"></i>
+                        {% if user.selfMute or user.mute or user.suppress %}
+                        <span class="fa-stack fa-fw">
+                            <i class="fa fa-microphone fa-stack-1x"></i>
+                            {% if user.mute or user.suppress %}
+                            <i class="fa fa-ban fa-stack-2x text-success"></i>
+                            {% elseif user.selfMute %}
+                            <i class="fa fa-ban fa-stack-2x text-danger"></i>
+                            {% endif %}
+                        </span>
+                        {% endif %}
+                        {% if user.selfDeaf or user.deaf %}
+                        <span class="fa-stack fa-fw">
+                            <i class="fa fa-headphones fa-stack-1x"></i>
+                            {% if user.deaf %}
+                            <i class="fa fa-ban fa-stack-2x text-success"></i>
+                            {% elseif user.selfDeaf %}
+                            <i class="fa fa-ban fa-stack-2x text-danger"></i>
+                            {% endif %}
+                        </span>
+                        {% endif %}
+                    </div>
+                    {% if user.recording %}
+                        <i class="fa fa-circle faa-pulse animated text-danger"></i>
+                    {% endif %}
+                    <h3 class="panel-title"><small>{{ user.session }}</small> {{ user.name }} <small>{{ murmur_tree_builder.channel_breadcrumb(server, user.channel) }}</small></h3>
+                </div>
+                <div id="user-{{ user.session }}">
+                    <div class="panel-body" >
+                        <div>
+                            {% if user.comment %} 
+                            <a href="#" data-toggle="collapse" data-target="#user-{{ user.session }} .comment">Voir le commentaire</a>
+                            <div class="comment collapse">
+                                <blockquote>{{ user.comment }}</blockquote>
+                            </div>
+                            {% else %}
+                                <span class="text-muted">Pas de commentaire</span>
+                            {% endif %}
+                        </div>
+                        <p>
+                            En ligne depuis <strong><span data-uptime="{{ user.onlinesecs }}">{{ user.onlinesecs|seconds_pretty }}</span></strong>.
+                            {% if user.idlesecs != 0 %}
+                                Absent depuis <strong><span data-uptime="{{ user.idlesecs }}">{{ user.idlesecs|seconds_pretty }}</span></strong>.
+                            {% endif %}
+                        </p>
+                    </div>
+
+                    <!-- Table -->
+                    <table class="table">
+                        <tr>
+                            <th>Canal</th>
+                            <td>{{ murmur_tree_builder.channel_breadcrumb(server, user.channel) }}</td>
+                        </tr>
+                        <tr>
+                            <th>Version</th>
+                            <td>{{ user.version }} ({{ user.release }})</td>
+                        </tr>
+                        <tr>
+                            <th>OS</th>
+                            <td>{{ user.os }} ({{ user.osversion }})</td>
+                        </tr>
+                        <tr>
+                            <th>Adresse IP</th>
+                            <td>{{ user.address|address }}</td>
+                        </tr>
+                        <tr>
+                            <th>Débit</th>
+                            <td>{{ user.bytespersec|format_bytes }}/s</td>
+                        </tr>
+                        <tr>
+                            <th>Ping</th>
+                            <td>TCP: <strong>{{ user.tcpPing|number_format }}</strong>, UDP: <strong>{{ user.udpPing|number_format }}</strong>{% if user.tcponly %}, <span class="text-danger">flux TCP</span>{% endif %}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+    {{ dump(server.users) }}
 {% endblock %}

@@ -13,9 +13,10 @@
     <link rel="apple-touch-icon" sizes="144x144" href="{{ asset('/images/front/touch-icon-ipad-retina.png') }}" />
     <meta name="robots" content="index,follow,archive" />
     <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.1/cosmo/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.5/cosmo/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="//cdn.rawgit.com/l-lin/font-awesome-animation/a74db1b78ea3c1655c070de6309fd8c7e7363ff8/dist/font-awesome-animation.min.css">
 
     {% block meta_others %}{% endblock %}
 </head>
@@ -44,18 +45,6 @@
         </div>
     </nav>
 
-{% if app.session.flashbag|length > 0 %}
-    <div class="container flash-container">
-        {% for label, flashes in app.session.flashbag.all %}
-            {% for flash in flashes %}
-                <div class="alert alert-{{ label }}">
-                    {{ flash }}
-                </div>
-            {% endfor %}
-        {% endfor %}
-    </div>
-{% endif %}
-
     {% block content %}{% endblock %}
 
     <footer class="footer">
@@ -63,7 +52,7 @@
     </footer>
 
     <script type="text/javascript" src="//code.jquery.com/jquery-2.1.3.min.js"></script>
-    <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     {% block javascripts %}{% endblock %}
 </body>
 </html>
