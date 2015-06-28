@@ -1,20 +1,21 @@
 {% extends "ResourceBundle:Layout:hub.html.twig" %}
 {% import "ResourceBundle:Macros:MurmurTreeBuilder.html.twig" as murmur_tree_builder %}
 
-{% block meta_title %}Edit{%endblock %}
+{% block meta_title %}View :: {{ server.name }}{%endblock %}
 
 {% block body %}
     <a href="{{ path('hub.control.startstop', {'serverId': server.id }) }}" class="pull-right btn btn-{{ server.isRunning ? 'danger' : 'info' }}">{{ server.isRunning ? 'Arrêter' : 'Démarrer' }}</a>
     <h1 class="page-header"><a href="{{ path('hub.index') }}" class="back-link">&lt;</a> {{ server.name }} <small><strong>{{ server.countUsers }}</strong>/{{ server.maxUsers }}</small></h1>
     <div class="row">
         <div class="col-md-12">
-            <a href="{{ path('hub.message.channel', {'serverId': server.id }) }}" class="btn btn-primary">Message</a>
+            <a href="{{ path('hub.message.channel', {'serverId': server.id }) }}" class="btn btn-primary"><i class="fa fa-comment fa-lg"></i> Message</a>
+            <a href="{{ path('hub.logs', {'serverId': server.id }) }}" class="btn btn-primary"><i class="fa fa-history fa-lg"></i> Logs</a>
         </div>
     </div>
     <br />
     <div class="row">
     {% for user in server.users %}
-        <div class="col-md-6">
+        <div class="col-sm-6 col-md-4">
             <div class="panel panel-{{ user.tcponly ? 'danger' : 'default' }}">
                 <div class="panel-heading">
                     <div class="pull-right icons">

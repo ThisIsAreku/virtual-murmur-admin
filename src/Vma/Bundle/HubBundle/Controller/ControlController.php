@@ -32,7 +32,7 @@ class ControlController extends Controller
 //            throw new NotFoundHttpException();
 //        }
 
-        return $this->redirect($this->generateUrl('hub.edit', ['serverId' => $serverId]));
+        return $this->redirect($this->generateUrl('hub.view', ['serverId' => $serverId]));
     }
 
 }

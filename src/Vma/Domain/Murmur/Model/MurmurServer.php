@@ -158,7 +158,7 @@ class MurmurServer
         }
 
         foreach($this->murmurServer->getChannels() as $channel) {
-            if ($channel->id == $id) {
+            if ($channel->id === $id) {
                 $this->channelCache[$id] = $channel;
                 return $channel;
             }
