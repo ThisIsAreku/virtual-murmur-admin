@@ -48,7 +48,7 @@
     {% block content %}{% endblock %}
 
     <footer class="footer">
-        Virtual Murmur Admin {{ app_version }} <small>Murmur {{ MurmurServerVersion }}</small>
+        Virtual Murmur Admin {{ app_version }} <small>Murmur {{ MurmurServerVersion }}</small> - <span class="text-muted" data-uptime="{{ MurmurServerUptime }}">{{ MurmurServerUptime|seconds_pretty }}</span>
     </footer>
 
     <script type="text/javascript" src="//code.jquery.com/jquery-2.1.3.min.js"></script>

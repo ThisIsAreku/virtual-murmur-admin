@@ -77,7 +77,10 @@ class MurmurVersionExtension extends \Twig_Extension
 
     public function getGlobals()
     {
-        return ["MurmurServerVersion" => $this->murmurMeta->getVersion()];
+        return [
+            "MurmurServerVersion" => $this->murmurMeta->getVersion(),
+            "MurmurServerUptime"  => $this->murmurMeta->getUptime()+1,
+        ];
     }
 
 
