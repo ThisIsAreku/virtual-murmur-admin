@@ -1,0 +1,21 @@
+{% extends "ResourceBundle:Layout:hub.html.twig" %}
+{% import "ResourceBundle:Macros:MurmurTreeBuilder.html.twig" as murmur_tree_builder %}
+
+{% block meta_title %}Logs :: {{ server.name }}{%endblock %}
+
+{% block body %}
+    <h1 class="page-header"><a href="{{ path('hub.index') }}" class="back-link">&lt;</a> {{ server.name }} <small><strong>{{ server.countUsers }}</strong>/{{ server.maxUsers }}</small></h1>
+    <table class="table table-striped">
+        <tr>
+            <th>Date</th>
+            <th>Log</th>
+        </tr>
+        {% for log in server.getLog(0, server.getLogLen()) %}
+            <tr>
+                <td>{{ log.timestamp|date('d/m/Y H:i:s') }}</td>
+                <td>{{ log.txt }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
+

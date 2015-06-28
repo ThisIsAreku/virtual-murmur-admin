@@ -62,6 +62,19 @@ class DefaultController extends Controller
         return $this->render('HubBundle:Default:view.html.twig', ['serverId' => $serverId, 'server' => $server]);
     }
 
+    public function logsAction($serverId)
+    {
+        $murmurMeta = $this->get('murmur.meta');
+
+        try {
+            $server = $murmurMeta->getServer($serverId);
+        } catch (\Exception $e) {
+            throw new NotFoundHttpException();
+        }
+
+        return $this->render('HubBundle:Default:logs.html.twig', ['serverId' => $serverId, 'server' => $server]);
+    }
+
     public function messageChannelAction(Request $request, $serverId)
     {
         $murmurMeta = $this->get('murmur.meta');

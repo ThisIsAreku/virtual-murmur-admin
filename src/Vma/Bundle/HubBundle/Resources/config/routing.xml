@@ -17,6 +17,11 @@
         <requirement key="serverId">\d+</requirement>
     </route>
 
+    <route id="hub.logs" path="/s/{serverId}/logs">
+        <default key="_controller">HubBundle:Default:logs</default>
+        <requirement key="serverId">\d+</requirement>
+    </route>
+
     <route id="hub.channel" path="/s/{serverId}/channel/{channelId}">
         <default key="_controller">HubBundle:Default:channel</default>
         <requirement key="serverId">\d+</requirement>
