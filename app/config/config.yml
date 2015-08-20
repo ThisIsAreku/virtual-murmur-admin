@@ -65,3 +65,46 @@ swarrot:
         user_text_message:
             exchange: text_message
             routing_key: user
+
+
+# Nelmio API Doc Configuration
+nelmio_api_doc:
+    sandbox:
+        enabled: false
+        body_format:
+            formats: [form, json]
+            default_format: json
+        request_format:
+            formats:
+                json: application/json
+            method: accept_header
+
+# REST Configuration
+fos_rest:
+    allowed_methods_listener: true
+    body_listener:
+        array_normalizer: fos_rest.normalizer.camel_keys
+        # rules:
+        #     -
+        #         path: '^/api'
+        #         priorities: ['application/json', '*/*']
+        #         fallback_format: json
+        #         prefer_extension: true
+    param_fetcher_listener: true
+    routing_loader:
+        default_format: json
+        include_format: false
+    serializer:
+        serialize_null: true
+    view:
+        serialize_null: true
+        view_response_listener: force
+        mime_types:
+            json:
+                - 'application/json'
+                - 'application/vnd.api+json'
+        formats:
+            xml: false
+            json: true
+        templating_formats:
+            html: false

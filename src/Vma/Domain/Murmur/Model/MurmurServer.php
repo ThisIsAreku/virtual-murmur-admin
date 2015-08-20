@@ -9,11 +9,14 @@
 namespace Vma\Domain\Murmur\Model;
 
 use Murmur_Server;
+use JMS\Serializer\Annotation as Serializer;
 
+/**
+ * @Serializer\ExclusionPolicy("all")
+ */
 class MurmurServer
 {
 
-    /** @type \Murmur_Server */
     private $murmurServer = null;
     private $murmurMeta   = null;
     private $channelCache = [];
@@ -24,10 +27,6 @@ class MurmurServer
         $this->murmurMeta   = $meta;
     }
 
-    /**
-     * @param \Ice_ObjectPrx $iceObject
-     * @return MurmurServer
-     */
     public static function fromIceObject(\Ice_ObjectPrx $iceObject, MurmurMeta $meta)
     {
         return new self(\Murmur_ServerPrxHelper::checkedCast($iceObject), $meta);
@@ -93,11 +92,17 @@ class MurmurServer
         // TODO: Implement delete() method.
     }
 
+    /**
+     * @Serializer\VirtualProperty
+     */
     public function getId()
     {
         return $this->murmurServer->id();
     }
 
+    /**
+     * @Serializer\VirtualProperty
+     */
     public function getName()
     {
         if (!$this->isRunning()) {
@@ -136,14 +141,21 @@ class MurmurServer
         return $this->murmurServer->getUsers();
     }
 
+    /**
+     * @Serializer\VirtualProperty
+     */
     public function getCountUsers()
     {
         return count($this->getUsers());
     }
 
+
+    /**
+     * @Serializer\VirtualProperty
+     */
     public function getMaxUsers()
     {
-        return $this->getConf('users');
+        return intval($this->getConf('users'));
     }
 
     public function getChannels()
@@ -332,16 +344,24 @@ class MurmurServer
         // TODO: Implement setTexture() method.
     }
 
+
+    /**
+     * @Serializer\VirtualProperty
+     */
     public function getUptime()
     {
         return $this->murmurServer->getUptime();
     }
 
-    public function getLog($first, $last)
+    public function getLog($first = 0, $last = 10)
     {
         return $this->murmurServer->getLog($first, $last);
     }
 
+
+    /**
+     * @Serializer\VirtualProperty
+     */
     public function getLogLen()
     {
         return $this->murmurServer->getLogLen();

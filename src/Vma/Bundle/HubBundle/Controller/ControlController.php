@@ -19,18 +19,12 @@ class ControlController extends Controller
     {
         $murmurMeta = $this->get('murmur.meta');
 
-//        try {
-            /** @type MurmurServer $server */
-            $server = $murmurMeta->getServer($serverId);
-            if ($server->isRunning()) {
-                $server->stop();
-            } else {
-                $server->start();
-            }
-//
-//        } catch (\Exception $e) {
-//            throw new NotFoundHttpException();
-//        }
+        $server = $murmurMeta->getServer($serverId);
+        if ($server->isRunning()) {
+            $server->stop();
+        } else {
+            $server->start();
+        }
 
         return $this->redirect($this->generateUrl('hub.view', ['serverId' => $serverId]));
     }

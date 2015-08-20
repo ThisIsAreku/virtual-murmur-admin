@@ -9,3 +9,8 @@ hub:
 web:
     resource: "@WebBundle/Resources/config/routing.xml"
     prefix:   /
+
+app:
+    type: rest
+    resource: "@ApiBundle/Resources/config/routing.yml"
+    prefix:   /api

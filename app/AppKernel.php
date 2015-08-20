@@ -16,11 +16,15 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new Swarrot\SwarrotBundle\SwarrotBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle(),
+            new FOS\RestBundle\FOSRestBundle(),
+            new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
+            
             new Vma\Bundle\MurmurBundle\MurmurBundle(),
             new Vma\Bundle\WebBundle\WebBundle(),
             new Vma\Bundle\HubBundle\HubBundle(),
             new Vma\Bundle\ResourceBundle\ResourceBundle(),
             new Vma\Bundle\UserBundle\UserBundle(),
+            new Vma\Bundle\ApiBundle\ApiBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

@@ -1,0 +1,8 @@
+NelmioApiDocBundle:
+  resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
+  prefix: /doc
+
+
+server:
+  type: rest
+  resource: Vma\Bundle\ApiBundle\Controller\ServersController

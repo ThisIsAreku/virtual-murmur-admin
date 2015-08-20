@@ -7,9 +7,7 @@ class MurmurIceProxy
     private $iceHost;
     private $iceSecret;
 
-    /**
-     * @type \Murmur_Meta $meta
-     */
+
     private $meta = null;
 
     function __construct($iceHost, $iceSecret, $sliceIncludeFile, $iceIncludePath = null)
