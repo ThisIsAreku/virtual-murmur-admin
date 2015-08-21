@@ -9,11 +9,7 @@
 namespace Vma\Domain\Murmur\Model;
 
 use Murmur_Server;
-use JMS\Serializer\Annotation as Serializer;
 
-/**
- * @Serializer\ExclusionPolicy("all")
- */
 class MurmurServer
 {
 
@@ -92,17 +88,11 @@ class MurmurServer
         // TODO: Implement delete() method.
     }
 
-    /**
-     * @Serializer\VirtualProperty
-     */
     public function getId()
     {
         return $this->murmurServer->id();
     }
 
-    /**
-     * @Serializer\VirtualProperty
-     */
     public function getName()
     {
         if (!$this->isRunning()) {
@@ -141,18 +131,12 @@ class MurmurServer
         return $this->murmurServer->getUsers();
     }
 
-    /**
-     * @Serializer\VirtualProperty
-     */
     public function getCountUsers()
     {
         return count($this->getUsers());
     }
 
 
-    /**
-     * @Serializer\VirtualProperty
-     */
     public function getMaxUsers()
     {
         return intval($this->getConf('users'));
@@ -344,10 +328,6 @@ class MurmurServer
         // TODO: Implement setTexture() method.
     }
 
-
-    /**
-     * @Serializer\VirtualProperty
-     */
     public function getUptime()
     {
         return $this->murmurServer->getUptime();
@@ -358,10 +338,6 @@ class MurmurServer
         return $this->murmurServer->getLog($first, $last);
     }
 
-
-    /**
-     * @Serializer\VirtualProperty
-     */
     public function getLogLen()
     {
         return $this->murmurServer->getLogLen();

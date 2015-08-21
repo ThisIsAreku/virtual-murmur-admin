@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f7c0e01bfe3d951953c60fa80124dacd",
+    "hash": "8c35975f3791e42163f993a1c85dd690",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -2002,16 +2002,16 @@
         },
         {
             "name": "swarrot/swarrot",
-            "version": "v2.0.1",
+            "version": "v2.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swarrot/swarrot.git",
-                "reference": "4262f4341db388bc779f0ce34f3e4e94dda52a0c"
+                "reference": "4c1964fc4fce95b475a475cc2b444f643fd66439"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swarrot/swarrot/zipball/4262f4341db388bc779f0ce34f3e4e94dda52a0c",
-                "reference": "4262f4341db388bc779f0ce34f3e4e94dda52a0c",
+                "url": "https://api.github.com/repos/swarrot/swarrot/zipball/4c1964fc4fce95b475a475cc2b444f643fd66439",
+                "reference": "4c1964fc4fce95b475a475cc2b444f643fd66439",
                 "shasum": ""
             },
             "require": {
@@ -2021,15 +2021,16 @@
             },
             "require-dev": {
                 "doctrine/common": "~2.3",
-                "doctrine/dbal": "~2.0",
+                "doctrine/dbal": "~2.2",
+                "phpspec/prophecy": "~1.4",
                 "phpspec/prophecy-phpunit": "~1.0",
                 "phpunit/phpunit": "~4.0",
-                "videlalvaro/php-amqplib": "~2.0"
+                "videlalvaro/php-amqplib": "~2.1"
             },
             "suggest": {
                 "pecl-amqp": "*",
                 "symfony/console": "~2.4",
-                "videlalvaro/php-amqplib": "~2.0"
+                "videlalvaro/php-amqplib": "~2.1"
             },
             "type": "library",
             "extra": {
@@ -2057,26 +2058,26 @@
                 "swarrot",
                 "worker"
             ],
-            "time": "2015-06-03 11:54:49"
+            "time": "2015-07-16 11:55:24"
         },
         {
             "name": "swarrot/swarrot-bundle",
-            "version": "v1.2.0",
+            "version": "v1.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swarrot/SwarrotBundle.git",
-                "reference": "4713edc8d50f5354572a433c8448c03df3ca98a4"
+                "reference": "85353756bce374d1f4011b420c706b72520422f8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swarrot/SwarrotBundle/zipball/4713edc8d50f5354572a433c8448c03df3ca98a4",
-                "reference": "4713edc8d50f5354572a433c8448c03df3ca98a4",
+                "url": "https://api.github.com/repos/swarrot/SwarrotBundle/zipball/85353756bce374d1f4011b420c706b72520422f8",
+                "reference": "85353756bce374d1f4011b420c706b72520422f8",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.4",
                 "psr/log": "~1.0",
-                "swarrot/swarrot": "~1.2",
+                "swarrot/swarrot": "~2.0",
                 "symfony/console": "~2.4",
                 "symfony/framework-bundle": "~2.4"
             },
@@ -2112,7 +2113,7 @@
                 "bundle",
                 "swarrot"
             ],
-            "time": "2015-05-19 14:17:05"
+            "time": "2015-08-20 14:55:17"
         },
         {
             "name": "symfony/assetic-bundle",
@@ -3459,14 +3460,7 @@
             "time": "2015-03-17 06:36:52"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.6.2",
-            "alias_normalized": "1.6.2.0",
-            "version": "2.0.1.0",
-            "package": "swarrot/swarrot"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "symfony/symfony": 10,
