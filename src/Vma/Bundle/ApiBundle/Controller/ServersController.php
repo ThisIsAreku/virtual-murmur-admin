@@ -34,21 +34,19 @@ class ServersController extends Controller
     }
 
     /**
-     * Get log lines.
+     * View server.
      *
-     * @Rest\QueryParam(name="first", requirements="\d+", description="First log", default="0")
-     * @Rest\QueryParam(name="count", requirements="\d+", description="Number of log lines", default="10")
      * @ApiDoc(
-     *     resource=true,
+     *     resource=false,
      *     section="Servers",
      *     statusCodes={
      *         200="Returned when successful",
      *         404="Returned when page does not exist"
      *     }
      * )
-     * @Rest\Get("/servers/{serverId}/log")
+     * @Rest\Get("/servers/{serverId}/view")
      */
-    public function logAction(ParamFetcher $paramFetcher, $serverId)
+    public function viewAction($serverId)
     {
         $murmurMeta = $this->get('murmur.meta');
         if ($murmurMeta === null) {
@@ -57,8 +55,85 @@ class ServersController extends Controller
 
         $server = $murmurMeta->getServer($serverId);
 
-        return $server->getLog(intval($paramFetcher->get('first')), intval($paramFetcher->get('count')));
+        return $server;
     }
+
+    /**
+     * List online users.
+     *
+     * @ApiDoc(
+     *     resource=false,
+     *     section="Servers",
+     *     statusCodes={
+     *         200="Returned when successful",
+     *         404="Returned when page does not exist"
+     *     }
+     * )
+     * @Rest\Get("/servers/{serverId}/users")
+     */
+    public function listOnlineUsersAction($serverId)
+    {
+        $murmurMeta = $this->get('murmur.meta');
+        if ($murmurMeta === null) {
+            throw new \Exception();
+        }
+
+        $server = $murmurMeta->getServer($serverId);
+
+        return array_values($server->getUsers());
+    }
+
+    /**
+     * List channels.
+     *
+     * @ApiDoc(
+     *     resource=false,
+     *     section="Servers",
+     *     statusCodes={
+     *         200="Returned when successful",
+     *         404="Returned when page does not exist"
+     *     }
+     * )
+     * @Rest\Get("/servers/{serverId}/channels")
+     */
+    public function listChannelsAction($serverId)
+    {
+        $murmurMeta = $this->get('murmur.meta');
+        if ($murmurMeta === null) {
+            throw new \Exception();
+        }
+
+        $server = $murmurMeta->getServer($serverId);
+
+        return $server->getChannels();
+    }
+
+//    /**
+//     * Get log lines.
+//     *
+//     * @Rest\QueryParam(name="first", requirements="\d+", description="First log", default="0")
+//     * @Rest\QueryParam(name="count", requirements="\d+", description="Number of log lines", default="10")
+//     * @ApiDoc(
+//     *     resource=true,
+//     *     section="Servers",
+//     *     statusCodes={
+//     *         200="Returned when successful",
+//     *         404="Returned when page does not exist"
+//     *     }
+//     * )
+//     * @Rest\Get("/servers/{serverId}/log")
+//     */
+//    public function logAction(ParamFetcher $paramFetcher, $serverId)
+//    {
+//        $murmurMeta = $this->get('murmur.meta');
+//        if ($murmurMeta === null) {
+//            throw new \Exception();
+//        }
+//
+//        $server = $murmurMeta->getServer($serverId);
+//
+//        return $server->getLog(intval($paramFetcher->get('first')), intval($paramFetcher->get('count')));
+//    }
 
     // public function viewAction($serverId)
     // {

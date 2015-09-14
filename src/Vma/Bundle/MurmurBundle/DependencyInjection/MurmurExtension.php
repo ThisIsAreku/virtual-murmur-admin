@@ -31,7 +31,7 @@ class MurmurExtension extends Extension
             if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
                 $separator = ';';
             }
-            set_include_path(get_include_path() . $separator . $container->getParameter('vma_ice_include'));
+            set_include_path(trim(get_include_path(), $separator) . $separator . $container->getParameter('vma_ice_include'));
         }
     }
 }
